@@ -9,14 +9,15 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Nunito', 'sans-serif'],
+                        sans: ['Manrope', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
                     },
                     colors: {
                         brand: {
@@ -35,7 +36,9 @@
         }
     </script>
     <style>
-        body { background-color: #f4f7f6; font-family: 'Nunito', sans-serif; }
+        body { background-color: #f4f7f6; font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Poppins', sans-serif; }
+        
         .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.12); }
         
@@ -67,7 +70,7 @@
                         <i data-lucide="graduation-cap" class="w-7 h-7"></i>
                     </div>
                     <div>
-                        <span class="font-extrabold text-2xl text-brand-teal tracking-tight block leading-none">EduPantau</span>
+                        <span class="font-extrabold text-2xl text-brand-teal tracking-tight block leading-none font-heading">EduPantau</span>
                         <span class="text-xs text-slate-400 font-bold" id="header-role-subtitle">Monitoring & Jurnal Sekolah</span>
                     </div>
                 </div>
