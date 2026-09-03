@@ -557,10 +557,41 @@
 
         // Save Journal Entry to Firestore
         window.saveJournalToFirestore = async function(journalData) {
+            // 1. Coba ulang otentikasi jika sebelumnya gagal/tertunda
             if (!auth.currentUser) {
-                showToast("Proses otentikasi belum selesai. Coba lagi...", "error");
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (e) {
+                    console.warn("Auth retry failed, entering offline mode:", e);
+                }
+            }
+
+            // 2. Jika otentikasi masih gagal (terblokir browser), gunakan Offline Fallback
+            if (!auth.currentUser) {
+                showToast("Otentikasi cloud tertunda. Disimpan secara lokal/offline.", "warning");
+                
+                journalData.id = "local_" + Date.now();
+                
+                // Update atau tambah ke memori lokal agar UI tetap berjalan lancar
+                const existingIdx = window.appState.journals.findIndex(j => 
+                    j.date === journalData.date && j.jam === journalData.jam && j.kelas === journalData.kelas && j.semester === journalData.semester
+                );
+                
+                if(existingIdx >= 0) {
+                    window.appState.journals[existingIdx] = journalData;
+                } else {
+                    window.appState.journals.push(journalData);
+                }
+                
+                renderApp(); // Refresh UI
                 return;
             }
+
+            // 3. Simpan ke Firebase Database jika otentikasi sukses
             try {
                 const docId = `jurnal_${journalData.semester.replace(/[^a-zA-Z0-9]/g, '_')}_${journalData.date}_${journalData.kelas.replace(/\s+/g, '')}_${journalData.jam}`;
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'journals', docId);
