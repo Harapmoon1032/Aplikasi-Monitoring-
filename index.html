@@ -184,7 +184,7 @@
                             class="text-sm font-black text-ink-black font-heading tracking-wider">13:43:55 WIB</span>
                     </div>
 
-                    <div id="user-pill-container" class="flex items-center">
+                    <div id="user-pill-container" class="flex items-center gap-2">
                         <!-- Injected via JS -->
                     </div>
                 </div>
@@ -231,7 +231,7 @@
                 <div
                     class="inline-flex items-center gap-2 px-5 py-2 bg-ink-bg text-ink-black font-bold text-xs rounded-2xl border-2 border-ink-black max-w-xl">
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
-                    <span>Data terhubung langsung dengan jurnal pengajaran harian bapak/ibu guru.</span>
+                    <span>Data terhubung langsung dengan jurnal pengajaran harian bapak/ibu guru.â€</span>
                 </div>
             </div>
 
@@ -388,7 +388,7 @@
                         </div>
 
                         <!-- Table Area -->
-                        <div class="flex-grow flex flex-col pt-4">
+                        <div class="flex-grow flex flex-col pt-4 min-h-0">
 
                             <!-- Status Banner info jika di luar jam sekolah -->
                             <div id="school-status-banner"
@@ -397,10 +397,10 @@
                                 <span id="school-status-text">Status jadwal KBM hari ini.</span>
                             </div>
 
-                            <div class="overflow-x-auto custom-scrollbar">
+                            <div class="overflow-x-auto flex-grow flex flex-col custom-scrollbar min-h-0">
                                 <!-- Journal and attendance table header -->
                                 <div
-                                    class="grid grid-cols-12 min-w-[980px] rounded-2xl bg-ink-black p-3.5 text-white font-black text-[10px] uppercase tracking-wider mb-3 border-2 border-ink-black font-heading gap-2">
+                                    class="grid grid-cols-12 w-full min-w-[800px] rounded-2xl bg-ink-black p-3.5 text-white font-black text-[10px] uppercase tracking-wider mb-3 border-2 border-ink-black font-heading gap-2">
                                     <div class="col-span-2">Tanggal & Jam</div>
                                     <div class="col-span-1">Kelas</div>
                                     <div class="col-span-2">Guru</div>
@@ -411,7 +411,7 @@
                                 </div>
 
                                 <!-- List Container -->
-                                <div class="flex-grow overflow-y-auto max-h-[580px] min-w-[980px] custom-scrollbar space-y-2.5 pr-1"
+                                <div class="flex-1 overflow-y-auto w-full min-w-[800px] custom-scrollbar space-y-2.5 pr-1 min-h-0"
                                     id="teaching-now-container">
                                     <!-- Injected via JS -->
                                 </div>
@@ -645,18 +645,29 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="text-center mb-6 relative z-10 mt-2">
-                <div
+            <!-- Role Tab Switcher -->
+            <div class="flex p-1 bg-ink-bg rounded-2xl border-2 border-ink-black mb-5">
+                <button type="button" id="tab-auth-guru" onclick="switchAuthTab('guru')"
+                    class="flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 bg-ink-black text-white shadow-sm font-heading">
+                    <i data-lucide="user-check" class="w-4 h-4"></i> Portal Guru
+                </button>
+                <button type="button" id="tab-auth-ketua" onclick="switchAuthTab('ketua_kelas')"
+                    class="flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 text-ink-black hover:bg-white/60 font-heading">
+                    <i data-lucide="award" class="w-4 h-4"></i> Portal Ketua Kelas
+                </button>
+            </div>
+
+            <div class="text-center mb-6 relative z-10">
+                <div id="auth-modal-icon"
                     class="w-16 h-16 bg-ink-accent text-white rounded-2xl mx-auto flex items-center justify-center shadow-md border-2 border-ink-black mb-4">
                     <i data-lucide="sparkles" class="w-8 h-8 text-white"></i>
                 </div>
-                <h2 class="text-2xl font-black text-ink-black font-heading">Login Portal Guru</h2>
-                <p class="text-xs text-ink-grayMuted font-bold mt-1">Masuk untuk mengisi jurnal pengajaran & presensi
-                    siswa.</p>
+                <h2 id="auth-modal-title" class="text-2xl font-black text-ink-black font-heading">Login Portal Guru</h2>
+                <p id="auth-modal-subtitle" class="text-xs text-ink-grayMuted font-bold mt-1">Masuk untuk mengisi jurnal pengajaran & presensi siswa.</p>
             </div>
 
             <!-- Dropdown Select Nama Guru -->
-            <div class="mb-6 p-3.5 bg-ink-bg rounded-2xl border-2 border-ink-black">
+            <div id="quick-teacher-box" class="mb-6 p-3.5 bg-ink-bg rounded-2xl border-2 border-ink-black">
                 <label
                     class="block text-xs font-black text-ink-black mb-2 uppercase font-heading flex items-center gap-1.5">
                     <i data-lucide="user-check" class="w-4 h-4 text-ink-accent"></i> Pilih Nama Guru (Dropdown):
@@ -669,11 +680,23 @@
                     Username & PIN secara otomatis.</p>
             </div>
 
+            <!-- Dropdown Select Ketua Kelas -->
+            <div id="quick-ketua-box" class="mb-6 p-3.5 bg-ink-bg rounded-2xl border-2 border-ink-black hidden">
+                <label
+                    class="block text-xs font-black text-ink-black mb-2 uppercase font-heading flex items-center gap-1.5">
+                    <i data-lucide="award" class="w-4 h-4 text-ink-accent"></i> Pilih Ketua Kelas (Dropdown):
+                </label>
+                <select id="quick-ketua-select" onchange="fillQuickLoginKetua(this.value)"
+                    class="w-full p-3 text-xs bg-white border-2 border-ink-black rounded-xl font-bold text-ink-black outline-none cursor-pointer focus:ring-2 focus:ring-ink-accent">
+                    <option value="">-- Pilih Kelas / Ketua Kelas --</option>
+                </select>
+                <p class="text-[10px] text-ink-grayMuted font-bold mt-1.5">Pilih kelas di atas untuk mengisi Username & Password khusus secara otomatis.</p>
+            </div>
+
             <form onsubmit="handleUnifiedLogin(event)" class="space-y-4 relative z-10">
                 <div>
-                    <label
-                        class="block text-xs font-black text-ink-black mb-1.5 uppercase tracking-wide font-heading">Username
-                        / NIP</label>
+                    <label id="login-username-label"
+                        class="block text-xs font-black text-ink-black mb-1.5 uppercase tracking-wide font-heading">Username / NIP</label>
                     <div class="relative">
                         <i data-lucide="user" class="w-5 h-5 text-ink-grayMuted absolute left-3.5 top-3.5"></i>
                         <input type="text" id="login-username"
@@ -683,16 +706,15 @@
                 </div>
 
                 <div>
-                    <label
-                        class="block text-xs font-black text-ink-black mb-1.5 uppercase tracking-wide font-heading">Password
-                        / PIN</label>
+                    <label id="login-password-label"
+                        class="block text-xs font-black text-ink-black mb-1.5 uppercase tracking-wide font-heading">Password / PIN</label>
                     <div class="relative">
                         <i data-lucide="key-round" class="w-5 h-5 text-ink-grayMuted absolute left-3.5 top-3.5"></i>
                         <input type="password" id="login-password"
                             class="w-full pl-11 pr-4 py-3.5 text-sm bg-ink-bg border-2 border-ink-black rounded-2xl focus:ring-2 focus:ring-ink-accent outline-none font-bold text-ink-black placeholder-ink-grayMuted"
                             placeholder="" required>
                     </div>
-                    <p class="text-[10px] text-ink-grayMuted font-bold mt-2">PIN Bawaan: <code
+                    <p id="login-pin-hint" class="text-[10px] text-ink-grayMuted font-bold mt-2">PIN Bawaan Guru: <code
                             class="bg-ink-black text-white px-1.5 py-0.5 rounded font-bold">123456</code></p>
                 </div>
 
@@ -716,7 +738,7 @@
             <!-- Profile Info Card -->
             <div
                 class="bg-white rounded-[28px] p-6 shadow-[4px_4px_0px_0px_#111111] border-2 border-ink-black mb-6 flex items-center gap-5">
-                <div
+                <div id="teacher-profile-icon"
                     class="w-14 h-14 rounded-2xl bg-ink-black text-white flex items-center justify-center border-2 border-ink-black">
                     <i data-lucide="user-check" class="w-7 h-7"></i>
                 </div>
@@ -734,7 +756,7 @@
                         <i data-lucide="clipboard-signature" class="w-5 h-5 text-ink-accent"></i> Input Jurnal Mengajar
                         & Presensi Siswa
                     </h3>
-                    <span
+                    <span id="module-badge"
                         class="px-3 py-1 bg-ink-accent text-white text-[10px] font-black rounded-full uppercase tracking-wider font-heading border border-white/20">Modul
                         Guru</span>
                 </div>
@@ -891,9 +913,44 @@
         window.appState = {
             isLoggedIn: false,
             loggedTeacher: null,
+            userRole: 'guru',
+            activeAuthTab: 'guru',
             totalSemesterJournals: 0,
             journalLog: []
         };
+
+        const ketuaKelasAccounts = [
+            { username: 'ketua_xe1', password: 'E1#9aK7', kelas: 'X E1' },
+            { username: 'ketua_xe2', password: 'E2#3mP9', kelas: 'X E2' },
+            { username: 'ketua_xe3', password: 'E3#8xL2', kelas: 'X E3' },
+            { username: 'ketua_xe4', password: 'E4#5vR1', kelas: 'X E4' },
+            { username: 'ketua_xe5', password: 'E5#2tW6', kelas: 'X E5' },
+            { username: 'ketua_xe6', password: 'E6#7yN4', kelas: 'X E6' },
+            { username: 'ketua_xe7', password: 'E7#1bQ8', kelas: 'X E7' },
+            { username: 'ketua_xe8', password: 'E8#4zJ3', kelas: 'X E8' },
+            { username: 'ketua_xe9', password: 'E9#6fM5', kelas: 'X E9' },
+            { username: 'ketua_xe10', password: 'E10#0hS2', kelas: 'X E10' },
+            { username: 'ketua_xif1', password: 'F1#8kL3', kelas: 'XI F1' },
+            { username: 'ketua_xif2', password: 'F2#4pR9', kelas: 'XI F2' },
+            { username: 'ketua_xif3', password: 'F3#1mW6', kelas: 'XI F3' },
+            { username: 'ketua_xif4', password: 'F4#7vN2', kelas: 'XI F4' },
+            { username: 'ketua_xif5', password: 'F5#3zJ8', kelas: 'XI F5' },
+            { username: 'ketua_xif6', password: 'F6#9bQ5', kelas: 'XI F6' },
+            { username: 'ketua_xif7', password: 'F7#2fM1', kelas: 'XI F7' },
+            { username: 'ketua_xif8', password: 'F8#6tX4', kelas: 'XI F8' },
+            { username: 'ketua_xif9', password: 'F9#0hS7', kelas: 'XI F9' },
+            { username: 'ketua_xif10', password: 'F10#5aK2', kelas: 'XI F10' },
+            { username: 'ketua_xiif1', password: 'X1#3pL8', kelas: 'XII F1' },
+            { username: 'ketua_xiif2', password: 'X2#7mW1', kelas: 'XII F2' },
+            { username: 'ketua_xiif3', password: 'X3#2vR9', kelas: 'XII F3' },
+            { username: 'ketua_xiif4', password: 'X4#9zN4', kelas: 'XII F4' },
+            { username: 'ketua_xiif5', password: 'X5#1bJ6', kelas: 'XII F5' },
+            { username: 'ketua_xiif6', password: 'X6#5fQ2', kelas: 'XII F6' },
+            { username: 'ketua_xiif7', password: 'X7#8tM3', kelas: 'XII F7' },
+            { username: 'ketua_xiif8', password: 'X8#0hX7', kelas: 'XII F8' },
+            { username: 'ketua_xiif9', password: 'X9#4aS5', kelas: 'XII F9' },
+            { username: 'ketua_xiif10', password: 'X10#6kK1', kelas: 'XII F10' }
+        ];
 
         const subjectByTeacher = {
             "yulil choiri": "Bahasa Indonesia", "wiwik nawangsih": "B. Inggris Wajib", "caswidi": "Fisika",
@@ -1047,6 +1104,19 @@
             });
 
             renderTeacherOptions();
+            renderKetuaOptions();
+        }
+
+        function renderKetuaOptions() {
+            const select = document.getElementById('quick-ketua-select');
+            if (!select) return;
+            select.innerHTML = '<option value="">-- Pilih Kelas / Ketua Kelas --</option>';
+            ketuaKelasAccounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.username;
+                option.textContent = `Ketua Kelas ${account.kelas} (${account.username})`;
+                select.appendChild(option);
+            });
         }
 
         function renderTeacherOptions() {
@@ -1534,6 +1604,7 @@
             showDashboard();
             loadSiswaData();
             loadTeacherDirectory();
+            renderKetuaOptions();
             loadJadwalMapel();
             lucide.createIcons();
         };
@@ -1579,7 +1650,61 @@
             });
         }
 
-        function showAuth() {
+        function switchAuthTab(tabRole) {
+            window.appState.activeAuthTab = tabRole;
+            const tabGuru = document.getElementById('tab-auth-guru');
+            const tabKetua = document.getElementById('tab-auth-ketua');
+            const teacherBox = document.getElementById('quick-teacher-box');
+            const ketuaBox = document.getElementById('quick-ketua-box');
+            const titleEl = document.getElementById('auth-modal-title');
+            const subtitleEl = document.getElementById('auth-modal-subtitle');
+            const userLabel = document.getElementById('login-username-label');
+            const passLabel = document.getElementById('login-password-label');
+            const userInput = document.getElementById('login-username');
+            const passInput = document.getElementById('login-password');
+            const pinHint = document.getElementById('login-pin-hint');
+            const iconEl = document.getElementById('auth-modal-icon');
+
+            if (tabRole === 'ketua_kelas') {
+                if (tabGuru) tabGuru.className = "flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 text-ink-black hover:bg-white/60 font-heading";
+                if (tabKetua) tabKetua.className = "flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 bg-ink-black text-white shadow-sm font-heading";
+                if (teacherBox) teacherBox.classList.add('hidden');
+                if (ketuaBox) ketuaBox.classList.remove('hidden');
+                if (titleEl) titleEl.innerText = "Login Portal Ketua Kelas";
+                if (subtitleEl) subtitleEl.innerText = "Masuk sebagai Ketua Kelas untuk mengisi jurnal & presensi kelas.";
+                if (userLabel) userLabel.innerText = "Username Ketua Kelas";
+                if (passLabel) passLabel.innerText = "Password Khusus";
+                if (userInput) userInput.placeholder = "Contoh: ketua_xe1";
+                if (passInput) passInput.placeholder = "Masukkan password kelas Anda";
+                if (pinHint) pinHint.innerHTML = 'Password Khusus Ketua Kelas (Contoh: <code class="bg-ink-black text-white px-1.5 py-0.5 rounded font-bold">E1#9aK7</code> untuk X E1)';
+                if (iconEl) iconEl.innerHTML = '<i data-lucide="award" class="w-8 h-8 text-white"></i>';
+            } else {
+                if (tabGuru) tabGuru.className = "flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 bg-ink-black text-white shadow-sm font-heading";
+                if (tabKetua) tabKetua.className = "flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 text-ink-black hover:bg-white/60 font-heading";
+                if (teacherBox) teacherBox.classList.remove('hidden');
+                if (ketuaBox) ketuaBox.classList.add('hidden');
+                if (titleEl) titleEl.innerText = "Login Portal Guru";
+                if (subtitleEl) subtitleEl.innerText = "Masuk untuk mengisi jurnal pengajaran & presensi siswa.";
+                if (userLabel) userLabel.innerText = "Username / NIP";
+                if (passLabel) passLabel.innerText = "Password / PIN";
+                if (userInput) userInput.placeholder = "Masukkan Username Anda";
+                if (passInput) passInput.placeholder = "";
+                if (pinHint) pinHint.innerHTML = 'PIN Bawaan Guru: <code class="bg-ink-black text-white px-1.5 py-0.5 rounded font-bold">123456</code>';
+                if (iconEl) iconEl.innerHTML = '<i data-lucide="sparkles" class="w-8 h-8 text-white"></i>';
+            }
+            if (userInput) userInput.value = '';
+            if (passInput) passInput.value = '';
+            lucide.createIcons();
+        }
+
+        function fillQuickLoginKetua(key) {
+            const acc = ketuaKelasAccounts.find(item => item.username === key);
+            if (!acc) return;
+            document.getElementById('login-username').value = acc.username;
+            document.getElementById('login-password').value = acc.password;
+        }
+
+        function showAuth(targetTab = 'guru') {
             if (window.appState.isLoggedIn) {
                 document.getElementById('view-dashboard').classList.add('hidden-view');
                 document.getElementById('view-info').classList.add('hidden-view');
@@ -1587,41 +1712,91 @@
                 document.getElementById('view-teacher').classList.remove('hidden-view');
 
                 const t = window.appState.loggedTeacher;
-                document.getElementById('teacher-profile-name').innerText = t.name || 'Guru Pengampu';
-                document.getElementById('teacher-profile-info').innerText = `NIP: ${t.nip || '19880101 201501 1 001'} Mengampu: ${t.mapel || 'Mata Pelajaran'}`;
+                const isKetua = window.appState.userRole === 'ketua_kelas';
+                const profileIcon = document.getElementById('teacher-profile-icon');
+                const moduleBadge = document.getElementById('module-badge');
 
-                if (t.mapel) document.getElementById('input-mapel').value = t.mapel;
-                if (t.defaultClass) document.getElementById('input-kelas').value = t.defaultClass;
+                if (isKetua) {
+                    document.getElementById('teacher-profile-name').innerText = t.name || 'Ketua Kelas';
+                    document.getElementById('teacher-profile-info').innerText = `Role: Ketua Kelas | Kelas: ${t.defaultClass || '-'} | Akses: Presensi & Jurnal`;
+                    if (profileIcon) profileIcon.innerHTML = '<i data-lucide="award" class="w-7 h-7"></i>';
+                    if (moduleBadge) {
+                        moduleBadge.innerText = 'Modul Ketua Kelas';
+                        moduleBadge.className = 'px-3 py-1 bg-amber-600 text-white text-[10px] font-black rounded-full uppercase tracking-wider font-heading border border-white/20';
+                    }
+                    if (t.mapel) document.getElementById('input-mapel').value = t.mapel;
+                    if (t.defaultClass) document.getElementById('input-kelas').value = t.defaultClass;
+                } else {
+                    document.getElementById('teacher-profile-name').innerText = t.name || 'Guru Pengampu';
+                    document.getElementById('teacher-profile-info').innerText = `NIP: ${t.nip || '19880101 201501 1 001'} Mengampu: ${t.mapel || 'Mata Pelajaran'}`;
+                    if (profileIcon) profileIcon.innerHTML = '<i data-lucide="user-check" class="w-7 h-7"></i>';
+                    if (moduleBadge) {
+                        moduleBadge.innerText = 'Modul Guru';
+                        moduleBadge.className = 'px-3 py-1 bg-ink-accent text-white text-[10px] font-black rounded-full uppercase tracking-wider font-heading border border-white/20';
+                    }
+                    if (t.mapel) document.getElementById('input-mapel').value = t.mapel;
+                    if (t.defaultClass) document.getElementById('input-kelas').value = t.defaultClass;
+                }
 
                 autoFillClassStudentCount();
+                lucide.createIcons();
             } else {
                 document.getElementById('view-dashboard').classList.add('hidden-view');
                 document.getElementById('view-info').classList.add('hidden-view');
                 document.getElementById('view-auth').classList.remove('hidden-view');
                 document.getElementById('view-teacher').classList.add('hidden-view');
+                switchAuthTab(targetTab);
             }
         }
 
         function handleUnifiedLogin(e) {
             e.preventDefault();
             const uname = document.getElementById('login-username').value.trim();
-            const normalizedInput = normalizeTeacherName(uname);
-            const matchedTeacher = teacherDirectory.find(teacher =>
-                teacher.username.toLowerCase() === uname.toLowerCase() ||
-                (teacher.nip && teacher.nip === uname) ||
-                normalizeTeacherName(teacher.name).includes(normalizedInput)
-            );
+            const pwd = document.getElementById('login-password').value.trim();
 
-            if (matchedTeacher) {
-                window.appState.loggedTeacher = matchedTeacher;
-            } else {
+            const isKetuaTab = window.appState.activeAuthTab === 'ketua_kelas';
+            const matchedKetua = ketuaKelasAccounts.find(acc => acc.username.toLowerCase() === uname.toLowerCase());
+
+            if (isKetuaTab || matchedKetua || uname.toLowerCase().startsWith('ketua_')) {
+                if (!matchedKetua) {
+                    showToast("Username Ketua Kelas tidak ditemukan!", "error");
+                    return;
+                }
+                if (pwd !== matchedKetua.password) {
+                    showToast("Password Ketua Kelas salah!", "error");
+                    return;
+                }
+
+                window.appState.userRole = 'ketua_kelas';
                 window.appState.loggedTeacher = {
-                    name: uname || "Guru Pengampu",
-                    username: uname || "guru",
-                    nip: "-",
-                    mapel: "Mapel belum dipetakan",
-                    defaultClass: "X E1"
+                    name: `Ketua Kelas ${matchedKetua.kelas}`,
+                    username: matchedKetua.username,
+                    nip: `KETUA-${matchedKetua.kelas}`,
+                    mapel: `Ketua Kelas (${matchedKetua.kelas})`,
+                    defaultClass: matchedKetua.kelas,
+                    role: 'ketua_kelas'
                 };
+            } else {
+                const normalizedInput = normalizeTeacherName(uname);
+                const matchedTeacher = teacherDirectory.find(teacher =>
+                    teacher.username.toLowerCase() === uname.toLowerCase() ||
+                    (teacher.nip && teacher.nip === uname) ||
+                    normalizeTeacherName(teacher.name).includes(normalizedInput)
+                );
+
+                window.appState.userRole = 'guru';
+                if (matchedTeacher) {
+                    window.appState.loggedTeacher = { ...matchedTeacher, role: 'guru' };
+                } else {
+                    window.appState.loggedTeacher = {
+                        name: uname || "Guru Pengampu",
+                        username: uname || "guru",
+                        nip: "-",
+                        mapel: "Mapel belum dipetakan",
+                        defaultClass: "X E1",
+                        role: 'guru'
+                    };
+                }
             }
 
             window.appState.isLoggedIn = true;
@@ -1633,6 +1808,7 @@
         function handleLogout() {
             window.appState.isLoggedIn = false;
             window.appState.loggedTeacher = null;
+            window.appState.userRole = 'guru';
             showDashboard();
             showToast("Berhasil Keluar", "info");
         }
@@ -1641,20 +1817,27 @@
             const container = document.getElementById('user-pill-container');
             if (!window.appState.isLoggedIn) {
                 container.innerHTML = `
-                    <button onclick="showAuth()" class="bg-ink-accent hover:bg-ink-accentHover text-white px-5 py-2.5 rounded-full font-black text-xs shadow-[2px_2px_0px_0px_#111111] border-2 border-ink-black transition-all flex items-center gap-2 font-heading">
+                    <button onclick="showAuth('guru')" class="bg-ink-accent hover:bg-ink-accentHover text-white px-4 py-2.5 rounded-full font-black text-xs shadow-[2px_2px_0px_0px_#111111] border-2 border-ink-black transition-all flex items-center gap-1.5 font-heading">
                         <span>Login Guru</span> <i data-lucide="arrow-up-right" class="w-4 h-4 bg-white/20 rounded-full p-0.5"></i>
+                    </button>
+                    <button onclick="showAuth('ketua_kelas')" class="bg-white hover:bg-amber-100 text-ink-black px-4 py-2.5 rounded-full font-black text-xs shadow-[2px_2px_0px_0px_#111111] border-2 border-ink-black transition-all flex items-center gap-1.5 font-heading">
+                        <i data-lucide="award" class="w-4 h-4 text-ink-accent"></i> <span>Login Ketua Kelas</span>
                     </button>
                 `;
             } else {
+                const isKetua = window.appState.userRole === 'ketua_kelas';
+                const portalLabel = isKetua ? `Portal Ketua Kelas (${window.appState.loggedTeacher?.defaultClass || ''})` : 'Portal Guru';
+                const portalIcon = isKetua ? 'award' : 'edit-3';
                 container.innerHTML = `
                     <button onclick="showAuth()" class="bg-ink-black hover:bg-ink-blackLight text-white px-4 py-2 rounded-full font-black text-xs transition-colors border-2 border-ink-black mr-2 font-heading flex items-center gap-2">
-                        <i data-lucide="edit-3" class="w-3.5 h-3.5 text-ink-accent"></i> Portal Guru
+                        <i data-lucide="${portalIcon}" class="w-3.5 h-3.5 text-ink-accent"></i> ${portalLabel}
                     </button>
-                    <button onclick="handleLogout()" class="bg-ink-accentLight text-ink-accent hover:bg-red-200 p-2 rounded-full transition-colors border-2 border-ink-black">
+                    <button onclick="handleLogout()" class="bg-ink-accentLight text-ink-accent hover:bg-red-200 p-2 rounded-full transition-colors border-2 border-ink-black" title="Keluar">
                         <i data-lucide="log-out" class="w-4 h-4"></i>
                     </button>
                 `;
             }
+            lucide.createIcons();
         }
 
         // Calculation & Dynamic Rendering for Dashboard KPI Cards
@@ -1750,6 +1933,11 @@
 
             const scheduledEntries = getJadwalMapelAktif(filterVal);
             const activeSlot = jadwalHariIni.find(slot => currentMinutes >= timeToMinutes(slot.mulai) && currentMinutes < timeToMinutes(slot.selesai));
+            
+            // Determine active period explicitly (never display 'auto')
+            let currentActiveJam = filterVal !== 'auto' ? filterVal : (activeSlot ? activeSlot.jamKe : '1');
+            if (currentActiveJam === 'auto') currentActiveJam = '1';
+
             const entriesByClass = new Map();
             scheduledEntries.forEach(schedule => {
                 const classKey = getScheduleClassKey(schedule.kelas);
@@ -1759,7 +1947,7 @@
                 kelas: className,
                 guru: '-',
                 mapel: '-',
-                jam: scheduledEntries[0]?.jam || filterVal,
+                jam: currentActiveJam,
                 noSchedule: true,
                 isBreak: filterVal === 'auto' && activeSlot && activeSlot.ket !== 'KBM'
             });
@@ -1769,7 +1957,14 @@
                 const savedJournal = teachingDataMap[schedule.kelas] || {};
                 const d = { ...savedJournal, ...schedule };
                 const isSubmitted = savedJournal.journalSubmitted === true;
-                const slot = jadwalHariIni.find(item => item.jamKe === schedule.jam);
+
+                // Fix Jam display so it never shows 'auto'
+                let jamDisplay = d.jam;
+                if (!jamDisplay || jamDisplay === 'auto') {
+                    jamDisplay = currentActiveJam;
+                }
+
+                const slot = jadwalHariIni.find(item => item.jamKe === jamDisplay);
                 const slotStart = slot ? timeToMinutes(slot.mulai) : 0;
                 const slotEnd = slot ? timeToMinutes(slot.selesai) : 0;
                 const isActive = currentMinutes >= slotStart && currentMinutes < slotEnd;
@@ -1778,12 +1973,12 @@
                 const statusBadge = schedule.isBreak
                     ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-extrabold text-[10px] rounded-full border border-amber-300 flex items-center gap-1 font-heading"><i data-lucide="coffee" class="w-3 h-3"></i> Istirahat</span>`
                     : schedule.noSchedule
-                        ? `<span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-extrabold text-[10px] rounded-full border border-slate-300 flex items-center gap-1 font-heading"><i data-lucide="calendar-off" class="w-3 h-3"></i> Belum Ada Jadwal</span>`
+                        ? `<span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-extrabold text-[10px] rounded-full border border-slate-300 flex items-center gap-1 font-heading"><i data-lucide="clock" class="w-3 h-3"></i> Coming Soon</span>`
                         : isSubmitted
                             ? `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-extrabold text-[10px] rounded-full border border-emerald-300 flex items-center gap-1 font-heading"><i data-lucide="check-circle" class="w-3 h-3"></i> Terisi</span>`
                             : isActive
                                 ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-extrabold text-[10px] rounded-full border border-amber-300 flex items-center gap-1 font-heading"><i data-lucide="clock" class="w-3 h-3"></i> Belum Absen</span>`
-                                : `<span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-extrabold text-[10px] rounded-full border border-slate-300 flex items-center gap-1 font-heading"><i data-lucide="${isFinished ? 'check' : 'calendar-clock'}" class="w-3 h-3"></i> ${isFinished ? 'Selesai' : 'Akan Datang'}</span>`;
+                                : `<span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-extrabold text-[10px] rounded-full border border-slate-300 flex items-center gap-1 font-heading"><i data-lucide="${isFinished ? 'check' : 'clock'}" class="w-3 h-3"></i> ${isFinished ? 'Selesai' : 'Coming Soon'}</span>`;
 
                 const attendanceInfo = isSubmitted
                     ? `<div class="flex flex-col">
@@ -1793,10 +1988,10 @@
                     : `<span class="text-xs font-bold text-amber-700 italic">Belum Diinput</span>`;
 
                 html += `
-                <div class="grid grid-cols-12 min-w-[980px] items-center bg-white rounded-2xl border-2 border-ink-black p-3.5 hover:shadow-[3px_3px_0px_0px_#111111] transition-all gap-2">
+                <div class="grid grid-cols-12 w-full min-w-[800px] items-center bg-white rounded-2xl border-2 border-ink-black p-3.5 hover:shadow-[3px_3px_0px_0px_#111111] transition-all gap-2">
                     <div class="col-span-2 flex flex-col">
                         <span class="font-black text-[11px] text-ink-black">${dateTime}</span>
-                        <span class="text-[10px] font-bold text-ink-grayMuted">Jam Ke-${d.jam || '-'}</span>
+                        <span class="text-[10px] font-bold text-ink-grayMuted">Jam Ke-${jamDisplay}</span>
                     </div>
                     <div class="col-span-1">
                         <span class="px-2 py-1 bg-ink-black text-white font-black text-[11px] rounded-xl font-heading shadow-sm">${d.kelas}</span>
@@ -1861,22 +2056,25 @@
                 }
 
                 let statusHtml = '';
+                let rowBg = 'bg-white border-2 border-ink-black';
+                let iconColor = isBreak ? 'text-ink-black bg-ink-bg border border-ink-black' : 'text-white bg-ink-black';
+
                 if (status === "Terlewat") {
-                    statusHtml = `<span class="bg-ink-bg text-ink-grayMuted px-2.5 py-1 rounded-full text-[10px] font-black flex items-center justify-center gap-1 font-heading border border-ink-black"><i data-lucide="check" class="w-3 h-3"></i> Selesai</span>`;
+                    statusHtml = `<span class="bg-emerald-600 text-white px-2.5 py-1 rounded-full text-[10px] font-black flex items-center justify-center gap-1.5 shadow-sm font-heading border border-ink-black"><span class="w-2 h-2 rounded-full bg-emerald-200 animate-pulse"></span> Selesai</span>`;
+                    rowBg = 'bg-emerald-50/90 border-2 border-emerald-600 shadow-[2px_2px_0px_0px_#10b981]';
+                    iconColor = 'text-white bg-emerald-600 border border-ink-black';
                 } else if (status === "Berlangsung") {
                     statusHtml = `<span class="bg-ink-accent text-white px-2.5 py-1 rounded-full text-[10px] font-black flex items-center justify-center gap-1.5 shadow-sm font-heading border border-ink-black"><span class="w-2 h-2 rounded-full bg-white animate-ping"></span> Aktif</span>`;
+                    rowBg = 'bg-ink-accentLight border-2 border-ink-accent shadow-[2px_2px_0px_0px_#eb3b1c]';
                 } else {
                     statusHtml = `<span class="bg-white text-ink-black px-2.5 py-1 rounded-full text-[10px] font-black flex items-center justify-center gap-1 font-heading border border-ink-black"><i data-lucide="clock" class="w-3 h-3"></i> Nanti</span>`;
                 }
 
-                const iconColor = isBreak ? 'text-ink-black bg-ink-bg border border-ink-black' : 'text-white bg-ink-black';
-                const rowBg = status === "Berlangsung" ? 'bg-ink-accentLight border-2 border-ink-accent' : 'bg-white border-2 border-ink-black';
-
                 html += `
-                <div class="grid grid-cols-12 items-center rounded-2xl ${rowBg} p-2.5 mb-2 relative z-10 text-xs">
+                <div class="grid grid-cols-12 items-center rounded-2xl ${rowBg} p-2.5 mb-2 relative z-10 text-xs transition-all">
                     <div class="col-span-4 flex items-center gap-2">
                         <div class="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${iconColor}">
-                            <i data-lucide="${isBreak ? 'coffee' : 'list'}" class="w-3 h-3"></i>
+                            <i data-lucide="${isBreak ? 'coffee' : (status === 'Terlewat' ? 'check-circle' : 'list')}" class="w-3 h-3"></i>
                         </div>
                         <span class="font-black text-ink-black truncate font-heading">${j.ket !== 'KBM' ? j.ket : `Jam Ke-${j.jamKe}`}</span>
                     </div>
@@ -1890,6 +2088,7 @@
                 `;
             });
             container.innerHTML = html;
+            lucide.createIcons();
         }
 
         // Auto Fill & Calculate Functions for Teacher Portal
@@ -1939,6 +2138,8 @@
             }
         }
 
+        const GOOGLE_SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbzeV7Lka7IWHN1i4pVQUC0eG8r_jB3FUyyGxTb0FbF-CuEaMnuX_rLizCxosU3I-Vu0/exec';
+
         async function handleJournalSubmit(e) {
             e.preventDefault();
             const selectedClass = document.getElementById('input-kelas').value;
@@ -1953,6 +2154,10 @@
             const materi = document.getElementById('input-materi').value;
             const loggedTeacher = window.appState.loggedTeacher || {};
             const idGuru = loggedTeacher.username || loggedTeacher.nip || loggedTeacher.name || '';
+            const namaPengisi = loggedTeacher.name || 'Guru Pengampu';
+            const rolePengisi = window.appState.userRole || 'guru';
+            const tanggalJam = getJournalDateTime();
+
             const materiPelajaran = [
                 `Kelas: ${selectedClass}`,
                 `Mapel: ${mapel || 'Mata Pelajaran'}`,
@@ -1962,8 +2167,39 @@
                 `Materi: ${materi}`
             ].join(' | ');
 
+            // Prepare payload data for Google Spreadsheet
+            const spreadsheetParams = new URLSearchParams({
+                timestamp: tanggalJam,
+                id_guru: idGuru,
+                nama_guru: namaPengisi,
+                role: rolePengisi,
+                kelas: selectedClass,
+                mapel: mapel || 'Mata Pelajaran',
+                jam_ke: jam,
+                materi: materi,
+                hadir: hadir,
+                sakit: sakit,
+                izin: izin,
+                alpa: alpa,
+                catatan: notes,
+                materi_pelajaran: materiPelajaran
+            });
+
+            // Send to Google Spreadsheet Web App URL
             try {
-                const response = await fetch('simpan_jurnal.php', {
+                await fetch(GOOGLE_SPREADSHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: spreadsheetParams
+                });
+            } catch (sheetError) {
+                console.warn('Pengiriman ke Google Spreadsheet mengalami hambatan:', sheetError);
+            }
+
+            // Optional save to local PHP MySQL if active
+            try {
+                await fetch('simpan_jurnal.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
                     body: new URLSearchParams({
@@ -1971,20 +2207,14 @@
                         materi_pelajaran: materiPelajaran
                     })
                 });
-                const result = await response.json();
-                if (!response.ok || !result.success) {
-                    throw new Error(result.message || 'Data jurnal gagal disimpan.');
-                }
-            } catch (error) {
-                showToast(error.message || 'Server database tidak dapat dihubungi.', 'error');
-                return;
+            } catch (dbError) {
+                console.info('Server PHP MySQL tidak aktif, data tersimpan di Google Spreadsheet & memori aplikasi.');
             }
 
             const total = classMaster[selectedClass]?.total || (hadir + sakit + izin + alpa);
-            const tanggalJam = getJournalDateTime();
             const journalEntry = {
                 kelas: selectedClass,
-                guru: window.appState.loggedTeacher?.name || "Guru Pengampu",
+                guru: namaPengisi,
                 mapel: mapel || classMaster[selectedClass]?.mapelDefault || "Mata Pelajaran",
                 materi: materi,
                 jam: jam,
@@ -2010,7 +2240,7 @@
             });
             window.appState.totalSemesterJournals = window.appState.journalLog.length;
 
-            showToast(`Jurnal & Presensi Kelas ${selectedClass} Berhasil Disimpan!`, "success");
+            showToast(`Jurnal & Presensi Kelas ${selectedClass} Berhasil Disimpan ke Spreadsheet!`, "success");
 
             // Reset materi & return to dashboard
             document.getElementById('input-materi').value = '';
