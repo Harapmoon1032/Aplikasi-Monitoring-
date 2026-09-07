@@ -141,18 +141,18 @@
                 
                 <!-- Starburst Retro Stamp Badge (Top Right Style) -->
                 <div class="absolute -top-4 -right-4 w-28 h-28 bg-ink-accent text-white rounded-full flex items-center justify-center rotate-12 font-heading font-black text-[10px] uppercase text-center p-2 border-2 border-ink-black hidden sm:flex shadow-md">
-                    <span>⚡ REALTIME<br>MONITORING</span>
+                    <span>âš¡ REALTIME<br>MONITORING</span>
                 </div>
 
                 <!-- Top Badge Pill -->
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-ink-accent text-white rounded-full text-xs font-black uppercase tracking-wider mb-3 border-2 border-ink-black font-heading">
                     <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-                    ⚡ REAL-TIME SCHOOL DASHBOARD
+                    âš¡ REAL-TIME SCHOOL DASHBOARD
                 </div>
 
                 <!-- Main Hero Heading -->
                 <h1 class="text-2xl md:text-4xl font-black text-ink-black mb-3 font-heading tracking-tight max-w-3xl leading-tight">
-                    Mewujudkan Monitoring Kelas & Kehadiran Siswa Yang <span class="text-ink-accent underline decoration-ink-black decoration-4 underline-offset-4">Presisi dan Transparan</span> ✨
+                    Mewujudkan Monitoring Kelas & Kehadiran Siswa Yang <span class="text-ink-accent underline decoration-ink-black decoration-4 underline-offset-4">Presisi dan Transparan</span> âœ¨
                 </h1>
 
                 <!-- Body Subtext -->
@@ -163,7 +163,7 @@
                 <!-- Bottom Message Pill -->
                 <div class="inline-flex items-center gap-2 px-5 py-2 bg-ink-bg text-ink-black font-bold text-xs rounded-2xl border-2 border-ink-black max-w-xl">
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
-                    <span>“Data terhubung langsung dengan jurnal pengajaran harian bapak/ibu guru.”</span>
+                    <span>â€œData terhubung langsung dengan jurnal pengajaran harian bapak/ibu guru.â€</span>
                 </div>
             </div>
 
@@ -184,9 +184,9 @@
                         <span class="text-xs font-extrabold text-emerald-600" id="stat-attendance-counts">(368/380)</span>
                     </div>
                     <div class="flex items-center gap-1.5 text-[11px] font-extrabold text-ink-grayMuted pt-2 border-t border-gray-200 mt-2">
-                        <span class="text-emerald-600" id="stat-detail-h">368 Hadir</span> • 
-                        <span class="text-amber-600" id="stat-detail-s">6 Sakit</span> • 
-                        <span class="text-blue-600" id="stat-detail-i">4 Izin</span> • 
+                        <span class="text-emerald-600" id="stat-detail-h">368 Hadir</span> â€¢ 
+                        <span class="text-amber-600" id="stat-detail-s">6 Sakit</span> â€¢ 
+                        <span class="text-blue-600" id="stat-detail-i">4 Izin</span> â€¢ 
                         <span class="text-red-600" id="stat-detail-a">2 Alpa</span>
                     </div>
                 </div>
@@ -513,7 +513,7 @@
                     <label class="block text-xs font-black text-ink-black mb-1.5 uppercase tracking-wide font-heading">Password / PIN</label>
                     <div class="relative">
                         <i data-lucide="key-round" class="w-5 h-5 text-ink-grayMuted absolute left-3.5 top-3.5"></i>
-                        <input type="password" id="login-password" class="w-full pl-11 pr-4 py-3.5 text-sm bg-ink-bg border-2 border-ink-black rounded-2xl focus:ring-2 focus:ring-ink-accent outline-none font-bold text-ink-black placeholder-ink-grayMuted" placeholder="••••••••" required>
+                        <input type="password" id="login-password" class="w-full pl-11 pr-4 py-3.5 text-sm bg-ink-bg border-2 border-ink-black rounded-2xl focus:ring-2 focus:ring-ink-accent outline-none font-bold text-ink-black placeholder-ink-grayMuted" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
                     </div>
                     <p class="text-[10px] text-ink-grayMuted font-bold mt-2">PIN Bawaan: <code class="bg-ink-black text-white px-1.5 py-0.5 rounded font-bold">123456</code></p>
                 </div>
@@ -540,7 +540,7 @@
                 </div>
                 <div>
                     <h2 class="text-xl font-black text-ink-black font-heading" id="teacher-profile-name">Nama Guru</h2>
-                    <p class="text-xs text-ink-grayMuted font-bold" id="teacher-profile-info">NIP: - • Mengampu: -</p>
+                    <p class="text-xs text-ink-grayMuted font-bold" id="teacher-profile-info">NIP: - â€¢ Mengampu: -</p>
                 </div>
             </div>
 
@@ -756,11 +756,46 @@
             mapelDefault: 'Mata Pelajaran'
         }]));
 
-        const piketData = [
-            { name: "Maudy Ayunda, M.A.", isCoordinator: true },
-            { name: "Prof. Dr. Habibie, M.Sc.", isCoordinator: false },
-            { name: "Siti Nurhaliza, S.Pd.", isCoordinator: false }
-        ];
+        const piketData = {
+            Senin: [
+                "Sanusi, S.Pd.",
+                "Drs. Heru Wahyudi",
+                "Yunita Kurniawan, S.Pd.",
+                "Hetty Herawati, S.S, M.Pd.",
+                "Iva Sinatra, S.E.",
+                "Sri Dwi Retnaningsih, S.Pd, M.Pd."
+            ],
+            Selasa: [
+                "Erny Agustina, S.Pd.",
+                "Caswidi, S.Pd, M.Pd.",
+                "Sri Gurendo U, S.Pd.",
+                "Sri Padmini, S.Pd., M.Pd.",
+                "Winarno Anggono Rahmat, S.Pd.",
+                "Apriyanti, S.Pd."
+            ],
+            Rabu: [
+                "Widodo, S.Pd.",
+                "Sri Winarni, S.Pd, M.Pd.",
+                "Etik Listiyani, S.Pd",
+                "Siti Nurrohmah Fatmawati, S.Pd.",
+                "Dra. Tatik Suharyanti",
+                "Yulil Choiri, S.Pd."
+            ],
+            Kamis: [
+                "Dian Riana H, S.Pd.",
+                "Eka Dias W.A, S.Pd.",
+                "Gandung Widaryatmo, S.S.",
+                "Wiwik Nawangsih, S.Pd., M.Pd.",
+                "Eko Susanto, S.T, M.Pd."
+            ],
+            Jumat: [
+                "Rini Istikhomah, S.Pd.I.",
+                "Kriswanto Dwi U, S.Pd.",
+                "Dyah Widhowati, S.Sn.",
+                "Sri Budiningsih, S.Pd.",
+                "Syaiful Ali Nurdin, S.Pd."
+            ]
+        };
 
         const jadwalBel = {
             Senin: [
@@ -809,83 +844,61 @@
 
         function getJadwalHariIni() {
             const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][new Date().getDay()];
-            if (dayName === 'Senin' || dayName === 'Jumat') return jadwalBel[dayName];
-            if (['Selasa', 'Rabu', 'Kamis'].includes(dayName)) return jadwalBel.SelasaRabuKamis;
-            return [];
+            return jadwalBelPdf[dayName] || [];
         }
+        let jadwalMapel = {};
 
-        const jadwalMapel = {
-            Senin: {
-                '1': [
-                    { kelas: 'XII F4', guru: 'Irham', mapel: 'PAI' },
-                    { kelas: 'XII F5', guru: 'Anna Yuniati', mapel: 'PP' },
-                    { kelas: 'XI F10', guru: 'Sanusi', mapel: 'B Indo TL' },
-                    { kelas: 'XI F9', guru: 'Winarno', mapel: 'B. Indonesia' },
-                    { kelas: 'E5', guru: 'Yulil Choiri', mapel: 'B. Indonesia' },
-                    { kelas: 'XII F9', guru: 'Endang S', mapel: 'Sejarah TL' },
-                    { kelas: 'XII F1', guru: 'Heni Ratna', mapel: 'B. Inggris Wajib' },
-                    { kelas: 'E9', guru: 'Nasrul', mapel: 'B. Inggris Wajib' },
-                    { kelas: 'XII F2', guru: 'Sularti', mapel: 'MTK TL' },
-                    { kelas: 'XII F8', guru: 'Sri Winarni', mapel: 'Matematika' }
-                ]
-            },
-            Selasa: {
-                '1': [
-                    { kelas: 'XII F10', guru: 'Widiyasari', mapel: 'MTK TL' },
-                    { kelas: 'E8', guru: 'Siti Nurrohmah', mapel: 'IPA Biologi' },
-                    { kelas: 'E5', guru: 'Yunita K', mapel: 'IPA Kimia' },
-                    { kelas: 'E8', guru: 'Sri Dwi Retnaningsih', mapel: 'IPS Ekonomi' },
-                    { kelas: 'XI F8', guru: 'Taupik Mulyadi', mapel: 'Eko TL' },
-                    { kelas: 'XII F7', guru: 'Agustinus Budi', mapel: 'Geo TL' },
-                    { kelas: 'E6', guru: 'Irwan Pradana', mapel: 'IPS Geografi' },
-                    { kelas: 'E3', guru: 'Dyah Widhowati', mapel: 'Pend. Seni' },
-                    { kelas: 'E7', guru: 'Retno Puspito', mapel: 'Bahasa Jawa' },
-                    { kelas: 'XII F8', guru: 'Hetty Herawati', mapel: 'Sos TL' }
-                ]
-            },
-            Rabu: {
-                '1': [
-                    { kelas: 'E8', guru: 'Syaiful Ali N', mapel: 'PAI' },
-                    { kelas: 'XI F10', guru: 'Anna Yuniati', mapel: 'PP' },
-                    { kelas: 'E8', guru: 'Sanusi', mapel: 'Bahasa Indonesia' },
-                    { kelas: 'XI F10', guru: 'Winarno', mapel: 'Bahasa Indonesia' },
-                    { kelas: 'E4', guru: 'Yulil Choiri', mapel: 'Bahasa Indonesia' },
-                    { kelas: 'XII F9', guru: 'Endang S', mapel: 'Sejarah TL' },
-                    { kelas: 'XI F3', guru: 'Wiwik Nawangsih', mapel: 'B. Inggris Wajib' },
-                    { kelas: 'XII F4', guru: 'Heni Ratna', mapel: 'B. Inggris Wajib' },
-                    { kelas: 'XII F4', guru: 'Sularti', mapel: 'MTK TL' },
-                    { kelas: 'XII F6', guru: 'Sri Winarni', mapel: 'Matematika' }
-                ]
-            },
-            Kamis: {
-                '1': [
-                    { kelas: 'XII F7', guru: 'Irham', mapel: 'PAI' },
-                    { kelas: 'XI F7', guru: 'Winarno', mapel: 'Bahasa Indonesia' },
-                    { kelas: 'XI F2', guru: 'Heru Wahyudi', mapel: 'Bahasa Indonesia' },
-                    { kelas: 'E6', guru: 'Yulil Choiri', mapel: 'Bahasa Indonesia' },
-                    { kelas: 'XII F10', guru: 'Endang S', mapel: 'Sejarah TL' },
-                    { kelas: 'XII F6', guru: 'Heni Ratna', mapel: 'B. Inggris Wajib' },
-                    { kelas: 'XII F3', guru: 'Sularti', mapel: 'MTK TL' },
-                    { kelas: 'XII F10', guru: 'Sri Winarni', mapel: 'Matematika' },
-                    { kelas: 'XII F5', guru: 'Widiyasari', mapel: 'MTK TL' },
-                    { kelas: 'XI F1', guru: 'Eka Dias Wiwik', mapel: 'Bio TL' }
-                ]
-            },
-            Jumat: {
-                '1': [
-                    { kelas: 'E3', guru: 'Dadang Yhan', mapel: 'IPS Sejarah' },
-                    { kelas: 'XII F7/8', guru: 'Widodo', mapel: 'Penjasorkes' },
-                    { kelas: 'XI F5/6', guru: 'Erni Agustina', mapel: 'Penjasorkes' },
-                    { kelas: 'XII F9', guru: 'Sri Winarni', mapel: 'Matematika' },
-                    { kelas: 'E5', guru: 'Tien Umiyati', mapel: 'Matematika' },
-                    { kelas: 'XII F2', guru: 'Lilis Kusumawati', mapel: 'Bio TL' },
-                    { kelas: 'XI F2', guru: 'Eka Dias Wiwik', mapel: 'Bio TL' },
-                    { kelas: 'E1', guru: 'Siti Nurrohmah', mapel: 'IPA Biologi' },
-                    { kelas: 'XII F6', guru: 'Rina Kusumastuti', mapel: 'Fisika TL' },
-                    { kelas: 'E10', guru: 'Alimin Sutanto', mapel: 'IPA Kimia' }
-                ]
-            }
+        const jadwalBelPdf = {
+            Senin: [
+                { jamKe: "1", mulai: "07:00", selesai: "07:45", ket: "KBM" },
+                { jamKe: "2", mulai: "07:45", selesai: "08:30", ket: "KBM" },
+                { jamKe: "3", mulai: "08:30", selesai: "09:15", ket: "KBM" },
+                { jamKe: "4", mulai: "09:15", selesai: "10:00", ket: "KBM" },
+                { jamKe: "5", mulai: "10:15", selesai: "11:00", ket: "KBM" },
+                { jamKe: "6", mulai: "11:00", selesai: "11:45", ket: "KBM" },
+                { jamKe: "7", mulai: "12:20", selesai: "13:00", ket: "KBM" },
+                { jamKe: "8", mulai: "13:00", selesai: "13:40", ket: "KBM" },
+                { jamKe: "9", mulai: "13:40", selesai: "14:20", ket: "KBM" },
+                { jamKe: "10", mulai: "14:20", selesai: "15:00", ket: "KBM" }
+            ]
         };
+        jadwalBelPdf.Selasa = jadwalBelPdf.Senin;
+        jadwalBelPdf.Rabu = jadwalBelPdf.Senin;
+        jadwalBelPdf.Kamis = jadwalBelPdf.Senin;
+        jadwalBelPdf.Jumat = jadwalBelPdf.Senin;
+
+        async function loadJadwalMapel() {
+            try {
+                const response = await fetch('jadwal_mapel_guru_per_hari_perkelas.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Jadwal mapel tidak tersedia');
+                const data = await response.json();
+                const scheduleByDay = {};
+
+                Object.entries(data.jadwal || {}).forEach(([day, classes]) => {
+                    scheduleByDay[day] = {};
+                    Object.entries(classes).forEach(([className, entries]) => {
+                        entries.forEach(entry => {
+                            (entry.jam_ke || []).forEach(period => {
+                                const periodKey = String(period);
+                                if (!scheduleByDay[day][periodKey]) scheduleByDay[day][periodKey] = [];
+                                scheduleByDay[day][periodKey].push({
+                                    kelas: className,
+                                    guru: entry.guru,
+                                    mapel: entry.mapel,
+                                    jam: periodKey
+                                });
+                            });
+                        });
+                    });
+                });
+
+                jadwalMapel = scheduleByDay;
+                renderCurrentTeachingList();
+            } catch (error) {
+                console.warn('Jadwal mapel eksternal belum dapat dimuat:', error.message);
+                jadwalMapel = legacyJadwalMapel;
+            }
+        }
 
         function getNamaHariIni() {
             return ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][new Date().getDay()];
@@ -895,23 +908,37 @@
             const daySchedule = jadwalMapel[getNamaHariIni()] || {};
             const scheduleSlots = getJadwalHariIni();
             const nowMinutes = new Date().getHours() * 60 + new Date().getMinutes();
+            const activeSlot = scheduleSlots.find(slot =>
+                nowMinutes >= timeToMinutes(slot.mulai) && nowMinutes < timeToMinutes(slot.selesai)
+            );
             if (filterVal === 'auto') {
-                const entries = Object.entries(daySchedule).flatMap(([jamKe, schedules]) => {
-                    const slot = scheduleSlots.find(item => item.jamKe === jamKe);
-                    return slot && slot.ket === 'KBM'
-                        ? schedules.map(entry => ({ ...entry, jam: jamKe }))
-                        : [];
-                });
-                return entries;
+                return activeSlot && activeSlot.ket === 'KBM'
+                    ? (daySchedule[activeSlot.jamKe] || []).map(entry => ({ ...entry, jam: activeSlot.jamKe }))
+                    : [];
             }
-            const activeSlot = scheduleSlots.find(slot => {
-                const isSelected = filterVal !== 'auto' && slot.jamKe === filterVal;
-                const isActive = filterVal === 'auto' && nowMinutes >= timeToMinutes(slot.mulai) && nowMinutes < timeToMinutes(slot.selesai);
-                return (isSelected || isActive) && slot.ket === 'KBM';
-            });
-            return activeSlot
-                ? (daySchedule[activeSlot.jamKe] || []).map(entry => ({ ...entry, jam: activeSlot.jamKe }))
+            const selectedSlot = scheduleSlots.find(slot => slot.jamKe === filterVal && slot.ket === 'KBM');
+            return selectedSlot
+                ? (daySchedule[selectedSlot.jamKe] || []).map(entry => ({ ...entry, jam: selectedSlot.jamKe }))
                 : [];
+        }
+
+        function compareClassNames(firstClass, secondClass) {
+            const levelOrder = { X: 1, XI: 2, XII: 3 };
+            const parseClass = className => {
+                const match = String(className || '').toUpperCase().match(/^(XII|XI|X)\s+[A-Z](\d+)/);
+                return match
+                    ? { level: levelOrder[match[1]], number: Number(match[2]) }
+                    : { level: Number.MAX_SAFE_INTEGER, number: Number.MAX_SAFE_INTEGER };
+            };
+            const first = parseClass(firstClass);
+            const second = parseClass(secondClass);
+            return first.level - second.level || first.number - second.number || String(firstClass).localeCompare(String(secondClass));
+        }
+
+        function getScheduleClassKey(className) {
+            const normalized = String(className || '').trim().toUpperCase();
+            const firstClass = normalized.split('/')[0].trim();
+            return getClassKey(firstClass.startsWith('E') ? `X ${firstClass}` : firstClass);
         }
 
         const teachingDataMap = Object.fromEntries(daftarKelas.map(className => [className, {
@@ -1191,6 +1218,7 @@
             showDashboard();
             loadSiswaData();
             loadTeacherDirectory();
+            loadJadwalMapel();
             lucide.createIcons();
         };
 
@@ -1244,7 +1272,7 @@
                 
                 const t = window.appState.loggedTeacher;
                 document.getElementById('teacher-profile-name').innerText = t.name || 'Guru Pengampu';
-                document.getElementById('teacher-profile-info').innerText = `NIP: ${t.nip || '19880101 201501 1 001'} • Mengampu: ${t.mapel || 'Mata Pelajaran'}`;
+                document.getElementById('teacher-profile-info').innerText = `NIP: ${t.nip || '19880101 201501 1 001'} â€¢ Mengampu: ${t.mapel || 'Mata Pelajaran'}`;
                 
                 if (t.mapel) document.getElementById('input-mapel').value = t.mapel;
                 if (t.defaultClass) document.getElementById('input-kelas').value = t.defaultClass;
@@ -1405,21 +1433,23 @@
             }
 
             const scheduledEntries = getJadwalMapelAktif(filterVal);
+            const activeSlot = jadwalHariIni.find(slot => currentMinutes >= timeToMinutes(slot.mulai) && currentMinutes < timeToMinutes(slot.selesai));
+            const entriesByClass = new Map();
+            scheduledEntries.forEach(schedule => {
+                const classKey = getScheduleClassKey(schedule.kelas);
+                if (!entriesByClass.has(classKey)) entriesByClass.set(classKey, schedule);
+            });
+            const classEntries = daftarKelas.map(className => entriesByClass.get(getClassKey(className)) || {
+                kelas: className,
+                guru: '-',
+                mapel: '-',
+                jam: scheduledEntries[0]?.jam || filterVal,
+                noSchedule: true,
+                isBreak: filterVal === 'auto' && activeSlot && activeSlot.ket !== 'KBM'
+            });
             let html = '';
 
-            if (scheduledEntries.length === 0) {
-                container.innerHTML = `
-                    <div class="min-w-[980px] rounded-2xl border-2 border-dashed border-ink-black bg-ink-bg p-8 text-center">
-                        <i data-lucide="calendar-clock" class="w-8 h-8 mx-auto mb-2 text-ink-accent"></i>
-                        <p class="text-sm font-black text-ink-black">Tidak ada mata pelajaran yang sedang berlangsung.</p>
-                        <p class="text-xs font-bold text-ink-grayMuted mt-1">Jadwal akan tampil otomatis sesuai hari dan jam KBM.</p>
-                    </div>
-                `;
-                lucide.createIcons();
-                return;
-            }
-
-            scheduledEntries.forEach(schedule => {
+            classEntries.forEach(schedule => {
                 const savedJournal = teachingDataMap[schedule.kelas] || {};
                 const d = { ...savedJournal, ...schedule };
                 const isSubmitted = savedJournal.journalSubmitted === true;
@@ -1429,7 +1459,11 @@
                 const isActive = currentMinutes >= slotStart && currentMinutes < slotEnd;
                 const isFinished = currentMinutes >= slotEnd;
                 const dateTime = d.tanggalJam || getJournalDateTime();
-                const statusBadge = isSubmitted 
+                const statusBadge = schedule.isBreak
+                    ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-extrabold text-[10px] rounded-full border border-amber-300 flex items-center gap-1 font-heading"><i data-lucide="coffee" class="w-3 h-3"></i> Istirahat</span>`
+                    : schedule.noSchedule
+                    ? `<span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-extrabold text-[10px] rounded-full border border-slate-300 flex items-center gap-1 font-heading"><i data-lucide="calendar-off" class="w-3 h-3"></i> Belum Ada Jadwal</span>`
+                    : isSubmitted 
                     ? `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-extrabold text-[10px] rounded-full border border-emerald-300 flex items-center gap-1 font-heading"><i data-lucide="check-circle" class="w-3 h-3"></i> Terisi</span>`
                     : isActive
                         ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-extrabold text-[10px] rounded-full border border-amber-300 flex items-center gap-1 font-heading"><i data-lucide="clock" class="w-3 h-3"></i> Belum Absen</span>`
@@ -1470,16 +1504,18 @@
         function renderGuruPiket() {
             const container = document.getElementById('guru-piket-container');
             let html = '';
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const todayPiket = piketData[days[new Date().getDay()]] || [];
             
-            piketData.forEach(p => {
-                const badge = p.isCoordinator ? `<span class="px-2 py-0.5 bg-ink-accent text-white border border-ink-black rounded-full text-[9px] font-black uppercase tracking-wider ml-auto font-heading">Koordinator</span>` : '';
+            todayPiket.forEach((name) => {
+                const badge = '';
                 
                 html += `
                 <div class="flex items-center bg-ink-bg rounded-2xl p-3 border-2 border-ink-black">
                     <div class="w-8 h-8 rounded-xl bg-ink-black text-white flex items-center justify-center mr-3 flex-shrink-0 font-bold text-xs border border-ink-black">
                         <i data-lucide="user" class="w-4 h-4"></i>
                     </div>
-                    <span class="font-bold text-xs text-ink-black">${p.name}</span>
+                    <span class="font-bold text-xs text-ink-black">${name}</span>
                     ${badge}
                 </div>
                 `;
@@ -1587,7 +1623,7 @@
             }
         }
 
-        function handleJournalSubmit(e) {
+        async function handleJournalSubmit(e) {
             e.preventDefault();
             const selectedClass = document.getElementById('input-kelas').value;
             const mapel = document.getElementById('input-mapel').value;
@@ -1599,6 +1635,34 @@
             const alpa = parseInt(document.getElementById('input-alpa').value) || 0;
             const notes = document.getElementById('input-catatan-absensi').value.trim() || "-";
             const materi = document.getElementById('input-materi').value;
+            const loggedTeacher = window.appState.loggedTeacher || {};
+            const idGuru = loggedTeacher.username || loggedTeacher.nip || loggedTeacher.name || '';
+            const materiPelajaran = [
+                `Kelas: ${selectedClass}`,
+                `Mapel: ${mapel || 'Mata Pelajaran'}`,
+                `Jam ke-${jam}`,
+                `Hadir: ${hadir}, Sakit: ${sakit}, Izin: ${izin}, Alpa: ${alpa}`,
+                `Catatan absensi: ${notes}`,
+                `Materi: ${materi}`
+            ].join(' | ');
+
+            try {
+                const response = await fetch('simpan_jurnal.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                    body: new URLSearchParams({
+                        id_guru: idGuru,
+                        materi_pelajaran: materiPelajaran
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'Data jurnal gagal disimpan.');
+                }
+            } catch (error) {
+                showToast(error.message || 'Server database tidak dapat dihubungi.', 'error');
+                return;
+            }
 
             const total = classMaster[selectedClass]?.total || (hadir + sakit + izin + alpa);
             const tanggalJam = getJournalDateTime();
