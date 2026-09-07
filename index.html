@@ -110,11 +110,11 @@
 
                 <!-- Navigation Pill Menu -->
                 <nav class="hidden lg:flex items-center gap-1.5 bg-white p-1.5 rounded-full border-2 border-ink-black text-xs font-bold text-ink-black shadow-[2px_2px_0px_0px_#111111]">
-                    <a href="#" onclick="showDashboard()" class="bg-ink-black text-white px-4 py-2 rounded-full transition-all font-heading">Beranda</a>
-                    <a href="#" onclick="showDashboard()" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">Monitoring</a>
-                    <a href="#" onclick="showDashboard()" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">Fitur Kehadiran</a>
-                    <a href="#" onclick="showDashboard()" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">Histori Jurnal</a>
-                    <a href="#" onclick="showDashboard()" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">Tentang</a>
+                    <a href="#beranda" data-nav-section="beranda" onclick="navigateToSection('beranda'); return false;" class="bg-ink-black text-white px-4 py-2 rounded-full transition-all font-heading">Beranda</a>
+                    <a href="#fitur" data-nav-section="fitur" onclick="navigateToSection('fitur'); return false;" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">Fitur</a>
+                    <a href="#history" data-nav-section="history" onclick="navigateToSection('history'); return false;" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">History</a>
+                    <a href="#system-requirements" data-nav-section="system-requirements" onclick="navigateToSection('system-requirements'); return false;" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">System Requirements</a>
+                    <a href="#tentang" data-nav-section="tentang" onclick="navigateToSection('tentang'); return false;" class="hover:text-ink-accent px-4 py-2 rounded-full transition-all">Tentang</a>
                 </nav>
                 
                 <!-- Clock & Login Button -->
@@ -134,7 +134,7 @@
 
     <!-- Main Dashboard View -->
     <main id="view-dashboard" class="flex-grow w-full pb-16">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div id="beranda" class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8">
             
             <!-- Hero / Banner Utama Style -->
             <div class="bg-white rounded-[32px] p-8 md:p-10 mb-8 relative overflow-hidden border-2 border-ink-black shadow-[4px_4px_0px_0px_#111111] text-center flex flex-col items-center justify-center">
@@ -220,7 +220,7 @@
                     </div>
                     <div class="text-xs font-bold text-ink-grayMuted font-heading uppercase tracking-wide">Jurnal Semester Ini</div>
                     <div class="text-2xl font-black text-ink-black font-heading my-1 flex items-baseline gap-2">
-                        <span id="stat-total-journals">1,428</span>
+                        <span id="stat-total-journals">0</span>
                         <span class="text-xs font-bold text-purple-600">Terinput</span>
                     </div>
                     <div class="flex items-center justify-between text-[11px] font-extrabold text-ink-grayMuted pt-2 border-t border-gray-200 mt-2">
@@ -296,28 +296,25 @@
                             <!-- Status Banner info jika di luar jam sekolah -->
                             <div id="school-status-banner" class="hidden mb-4 p-3.5 rounded-2xl bg-ink-accentLight border-2 border-ink-accent text-ink-black text-xs font-bold flex items-center gap-2">
                                 <i data-lucide="info" class="w-4 h-4 text-ink-accent flex-shrink-0"></i>
-                                <span id="school-status-text">KBM Hari Ini Telah Selesai (Selesai pukul 15.05 WIB).</span>
+                                <span id="school-status-text">Status jadwal KBM hari ini.</span>
                             </div>
 
-                            <!-- Table Header (Black Solid Header with Attendance Info) -->
-                            <div class="grid grid-cols-12 rounded-2xl bg-ink-black p-3.5 text-white font-black text-xs uppercase tracking-wider mb-3 border-2 border-ink-black font-heading gap-2">
-                                <div class="col-span-2 flex items-center gap-1.5">
-                                    <span>KELAS</span>
+                            <div class="overflow-x-auto custom-scrollbar">
+                                <!-- Journal and attendance table header -->
+                                <div class="grid grid-cols-12 min-w-[980px] rounded-2xl bg-ink-black p-3.5 text-white font-black text-[10px] uppercase tracking-wider mb-3 border-2 border-ink-black font-heading gap-2">
+                                    <div class="col-span-2">Tanggal & Jam</div>
+                                    <div class="col-span-1">Kelas</div>
+                                    <div class="col-span-2">Guru</div>
+                                    <div class="col-span-2">Mata Pelajaran</div>
+                                    <div class="col-span-2">Materi Pembelajaran</div>
+                                    <div class="col-span-2">Absensi Siswa</div>
+                                    <div class="col-span-1 text-right">Status</div>
                                 </div>
-                                <div class="col-span-4 flex items-center gap-1.5">
-                                    <span>MAPEL & GURU</span>
-                                </div>
-                                <div class="col-span-3 flex items-center gap-1.5">
-                                    <span>KEHADIRAN SISWA</span>
-                                </div>
-                                <div class="col-span-3 text-right flex items-center justify-end gap-1.5">
-                                    <span>STATUS JURNAL</span>
-                                </div>
-                            </div>
 
-                            <!-- List Container -->
-                            <div class="flex-grow overflow-y-auto max-h-[580px] custom-scrollbar space-y-2.5 pr-1" id="teaching-now-container">
-                                <!-- Injected via JS -->
+                                <!-- List Container -->
+                                <div class="flex-grow overflow-y-auto max-h-[580px] min-w-[980px] custom-scrollbar space-y-2.5 pr-1" id="teaching-now-container">
+                                    <!-- Injected via JS -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -368,6 +365,114 @@
                 </div>
             </div>
         </div>
+
+    </main>
+
+    <!-- Information Pages View -->
+    <main id="view-info" class="flex-grow w-full pb-16 hidden-view">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+            <section id="fitur" class="scroll-mt-28">
+                <div class="bg-white rounded-[32px] border-2 border-ink-black p-6 md:p-8 shadow-[4px_4px_0px_0px_#111111]">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-ink-black">
+                        <span class="p-2.5 bg-ink-accent text-white rounded-2xl border-2 border-ink-black"><i data-lucide="sparkles" class="w-5 h-5"></i></span>
+                        <div>
+                            <p class="text-[10px] font-black uppercase tracking-wider text-ink-accent font-heading">Ekosistem Digital KBM</p>
+                            <h2 class="text-2xl font-black text-ink-black font-heading">Fitur Utama</h2>
+                        </div>
+                    </div>
+                    <p class="text-sm text-ink-grayMuted font-medium leading-relaxed text-justify mb-6">Sistem ini dirancang untuk memotong kerumitan administrasi KBM dan menggantikan jurnal kertas manual dengan ekosistem digital yang serba cepat:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-2">Input Jurnal Kilat (&lt; 1 Menit)</h3>
+                            <p class="text-xs text-ink-grayMuted leading-relaxed text-justify">Guru cukup memilih kelas dan mapel, memasukkan materi hari ini, lalu simpan. Tidak ada lagi tumpukan buku jurnal fisik yang rentan hilang.</p>
+                        </article>
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-2">Presensi Siswa Presisi &amp; Real-Time</h3>
+                            <p class="text-xs text-ink-grayMuted leading-relaxed text-justify">Rekam status kehadiran siswa (Hadir, Sakit, Izin, Alpa) yang otomatis terkunci pada sesi mengajar hari itu. Pencegahan <em>double-input</em> menjaga akurasi data tetap 100%.</p>
+                        </article>
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-2">Smart Dashboard &amp; Live Analytics</h3>
+                            <p class="text-xs text-ink-grayMuted leading-relaxed text-justify">Pantau statistik kehadiran siswa per kelas dan tingkat keaktifan mengajar guru secara visual lewat grafik dinamis yang langsung diperbarui otomatis.</p>
+                        </article>
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-2">One-Click Report Export</h3>
+                            <p class="text-xs text-ink-grayMuted leading-relaxed text-justify">Rekapitulasi laporan bulanan hingga semesteran bisa ditarik kapan saja ke format <strong>Excel (.xlsx)</strong> atau <strong>PDF siap cetak</strong> lengkap dengan filter per tanggal, kelas, atau mapel.</p>
+                        </article>
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-2">Log Catatan Kendala KBM</h3>
+                            <p class="text-xs text-ink-grayMuted leading-relaxed text-justify">Ruang khusus bagi guru untuk mencatat dinamika kelas (misal: kendala fasilitas atau penanganan siswa), memudahkan koordinasi lanjutan dengan Wali Kelas dan Tim BK.</p>
+                        </article>
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-2">Master Data Terpusat &amp; Terintegrasi</h3>
+                            <p class="text-xs text-ink-grayMuted leading-relaxed text-justify">Pengelolaan data puluhan guru, ribuan siswa, dan rombongan belajar dalam satu basis data yang rapi dan terstruktur.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="history" class="scroll-mt-28">
+                <div class="bg-white rounded-[32px] border-2 border-ink-black p-6 md:p-8 shadow-[4px_4px_0px_0px_#111111]">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-ink-black">
+                        <span class="p-2.5 bg-blue-600 text-white rounded-2xl border-2 border-ink-black"><i data-lucide="history" class="w-5 h-5"></i></span>
+                        <h2 class="text-2xl font-black text-ink-black font-heading">Riwayat Pengembangan (History)</h2>
+                    </div>
+                    <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                        <h3 class="font-black text-base text-ink-black font-heading mb-4">v1.0.0 (September 2026) - Official Release</h3>
+                        <ul class="space-y-3 text-xs text-ink-grayMuted leading-relaxed text-justify list-disc pl-5">
+                            <li><strong>Peluncuran Versi Perdana:</strong> Rilis resmi sistem pencatatan e-jurnal guru dan presensi siswa berbasis web.</li>
+                            <li><strong>Modul Transaksi Utuh:</strong> Integrasi pencatatan materi harian guru dengan rekapitulasi kehadiran siswa secara <em>real-time</em>.</li>
+                            <li><strong>Engine Laporan &amp; Ekspor:</strong> Fitur pengerjaan laporan otomatis yang dapat diunduh ke format <strong>Excel (.xlsx)</strong> dan <strong>PDF siap cetak</strong>.</li>
+                            <li><strong>Optimasi Database &amp; UI:</strong> Implementasi struktur basis data relasional yang efisien serta antarmuka yang ramah pengguna di berbagai perangkat.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="system-requirements" class="scroll-mt-28">
+                <div class="bg-white rounded-[32px] border-2 border-ink-black p-6 md:p-8 shadow-[4px_4px_0px_0px_#111111]">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-ink-black">
+                        <span class="p-2.5 bg-emerald-600 text-white rounded-2xl border-2 border-ink-black"><i data-lucide="server" class="w-5 h-5"></i></span>
+                        <div>
+                            <p class="text-[10px] font-black uppercase tracking-wider text-emerald-700 font-heading">Lightweight Deployment</p>
+                            <h2 class="text-2xl font-black text-ink-black font-heading">Persyaratan Sistem (System Requirements)</h2>
+                        </div>
+                    </div>
+                    <p class="text-sm text-ink-grayMuted font-medium leading-relaxed text-justify mb-6">Sistem ini didesain sangat ringan (<em>lightweight</em>) sehingga bisa dijalankan di server lokal sekolah (LAN) maupun layanan <em>cloud hosting</em>.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-3">Sisi Server (Minimum)</h3>
+                            <ul class="space-y-2 text-xs text-ink-grayMuted leading-relaxed text-justify list-disc pl-5">
+                                <li><strong>Lingkungan Web:</strong> Apache 2.4+ / Nginx 1.18+</li>
+                                <li><strong>Bahasa Pemrograman:</strong> PHP 8.1+</li>
+                                <li><strong>Database Engine:</strong> MySQL 8.0+ / MariaDB 10.5+ (Support InnoDB Engine)</li>
+                                <li><strong>Sistem Operasi:</strong> Linux (Ubuntu Server / Debian) atau Windows Server</li>
+                            </ul>
+                        </article>
+                        <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                            <h3 class="font-black text-sm text-ink-black font-heading mb-3">Sisi Pengguna (Client)</h3>
+                            <ul class="space-y-2 text-xs text-ink-grayMuted leading-relaxed text-justify list-disc pl-5">
+                                <li><strong>Perangkat:</strong> PC Desktop, Laptop, Tablet, atau HP (Android/iOS)</li>
+                                <li><strong>Browser:</strong> Google Chrome, Mozilla Firefox, Microsoft Edge, atau Safari versi terbaru</li>
+                                <li><strong>Jaringan:</strong> Terkoneksi ke Wi-Fi/LAN Sekolah atau Internet (Minimal bandwidth 2 Mbps)</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tentang" class="scroll-mt-28">
+                <div class="bg-white rounded-[32px] border-2 border-ink-black p-6 md:p-8 shadow-[4px_4px_0px_0px_#111111]">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-ink-black">
+                        <span class="p-2.5 bg-ink-black text-white rounded-2xl border-2 border-ink-black"><i data-lucide="info" class="w-5 h-5"></i></span>
+                        <h2 class="text-2xl font-black text-ink-black font-heading">Tentang Aplikasi</h2>
+                    </div>
+                    <article class="bg-ink-bg rounded-2xl border-2 border-ink-black p-5">
+                        <p class="text-sm text-ink-grayMuted leading-relaxed text-justify"><strong>Sistem Informasi Jurnal Mengajar &amp; Presensi Siswa</strong> adalah platform transformasi digital yang diciptakan untuk modernisasi tata kelola akademik sekolah.</p>
+                        <p class="text-sm text-ink-grayMuted leading-relaxed text-justify mt-4">Banyak waktu guru terbuang hanya untuk urusan administrasi kertas dan rekapitulasi manual. Aplikasi ini hadir sebagai solusi satu pintu yang memberikan efisiensi bagi guru saat mengajar, akurasi data bagi wali kelas, serta transparansi laporan riil bagi manajemen sekolah. Lebih hemat waktu, bebas kertas (<em>paperless</em>), dan siap mendukung digitalisasi sekolah secara menyeluruh.</p>
+                    </article>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- Auth View (Portal Login) -->
@@ -392,10 +497,6 @@
                 </label>
                 <select id="quick-teacher-select" onchange="fillQuickLogin(this.value)" class="w-full p-2.5 text-xs bg-white border-2 border-ink-black rounded-xl font-bold text-ink-black outline-none cursor-pointer focus:ring-2 focus:ring-ink-accent">
                     <option value="">-- Pilih Guru Demo --</option>
-                    <option value="reza">Reza Rahadian, M.Pd. (Seni Budaya - X.1)</option>
-                    <option value="dian">Dian Sastrowardoyo, S.Pd. (Sosiologi - XI IPS 1)</option>
-                    <option value="maudy">Maudy Ayunda, M.A. (Koordinator Piket)</option>
-                    <option value="iqbaal">Iqbaal Ramadhan, M.A. (Biologi - XII MIPA 1)</option>
                 </select>
             </div>
 
@@ -459,17 +560,7 @@
                         <div>
                             <label class="block text-xs font-black text-ink-black mb-2 uppercase font-heading">Pilih Kelas</label>
                             <select id="input-kelas" onchange="autoFillClassStudentCount()" class="w-full p-3.5 text-sm bg-ink-bg border-2 border-ink-black rounded-2xl font-bold text-ink-black outline-none focus:ring-2 focus:ring-ink-accent">
-                                <option value="X.1">X.1 (Total: 36 Siswa)</option>
-                                <option value="X.2">X.2 (Total: 35 Siswa)</option>
-                                <option value="X.3">X.3 (Total: 36 Siswa)</option>
-                                <option value="X.4">X.4 (Total: 34 Siswa)</option>
-                                <option value="XI MIPA 1">XI MIPA 1 (Total: 36 Siswa)</option>
-                                <option value="XI MIPA 2">XI MIPA 2 (Total: 35 Siswa)</option>
-                                <option value="XI IPS 1">XI IPS 1 (Total: 34 Siswa)</option>
-                                <option value="XI IPS 2">XI IPS 2 (Total: 35 Siswa)</option>
-                                <option value="XII Bahasa">XII Bahasa (Total: 30 Siswa)</option>
-                                <option value="XII MIPA 1">XII MIPA 1 (Total: 35 Siswa)</option>
-                                <option value="XII MIPA 2">XII MIPA 2 (Total: 34 Siswa)</option>
+                                <option value="X E1">X E1</option>
                             </select>
                         </div>
                         <div>
@@ -577,29 +668,93 @@
         window.appState = {
             isLoggedIn: false,
             loggedTeacher: null,
-            totalSemesterJournals: 1428
+            totalSemesterJournals: 0,
+            journalLog: []
         };
 
-        const demoTeachers = {
-            reza: { name: "Reza Rahadian, M.Pd.", username: "reza", nip: "19850315 201001 1 002", mapel: "Seni Budaya", defaultClass: "X.1" },
-            dian: { name: "Dian Sastrowardoyo, S.Pd.", username: "dian", nip: "19820316 200802 2 001", mapel: "Sosiologi", defaultClass: "XI IPS 1" },
-            maudy: { name: "Maudy Ayunda, M.A.", username: "maudy", nip: "19941219 201903 2 005", mapel: "Bahasa Inggris", defaultClass: "XII MIPA 1" },
-            iqbaal: { name: "Iqbaal Ramadhan, M.A.", username: "iqbaal", nip: "19991228 202201 1 008", mapel: "Biologi", defaultClass: "XII MIPA 1" }
+        const subjectByTeacher = {
+            "yulil choiri": "Bahasa Indonesia", "wiwik nawangsih": "B. Inggris Wajib", "caswidi": "Fisika",
+            "sri dwi retnaningsih": "IPS Ekonomi / Eko TL", "taupik mulyadi": "Eko TL", "tien umiyati": "Matematika",
+            "sri padmini": "Kimia TL", "heni ratna": "B. Inggris Wajib", "sri winarni": "Matematika",
+            "winarno": "Bahasa Indonesia", "alimin sutanto": "Kimia TL", "anna yuniati": "PP",
+            "up grading supramono": "IPS Ekonomi", "nasrul": "B. Inggris Wajib", "joko saryanto": "Matematika",
+            "eko susanto": "Informatika", "lilis kusumawati": "Bio TL", "sularti": "MTK TL",
+            "kriswanto dwi": "Pend. Seni", "andri fitrianingsih": "BP", "heru wahyudi": "Bahasa Indonesia",
+            "erny agustina": "Penjasorkes", "endang s": "Sejarah TL", "retno puspito": "Bahasa Jawa",
+            "tatik suharyanti": "PP", "widodo": "Penjasorkes", "widiyasari": "MTK TL",
+            "gandung": "Bahasa Jawa", "irham": "PAI", "ariezta rosalina": "Informatika",
+            "apriyanti": "Kimia TL", "endang budiastuti": "Pend. Seni", "hetty herawati": "Sos TL",
+            "suryani": "Sejarah", "iva sinatra": "PKWU", "andhika nurkharisma": "Informatika",
+            "agustinus budi": "Geo TL", "andhika parameswara": "Sos TL", "dian riana": "Matematika",
+            "wulan yunifah": "Informatika", "novia safitri": "BP", "pandu prapanca": "BP",
+            "nanda shiddiq": "Bahasa Indonesia", "endah widyastuti": "Informatika", "sri budiningsih": "Bahasa Jawa",
+            "siti nurrohmah": "IPA Biologi", "irwan pradana": "IPS Geografi", "dadang yhan": "IPS Sejarah",
+            "rina kusumastuti": "Fisika TL", "rini istikhomah": "PAI", "syaiful ali": "PAI",
+            "rio okta": "Pend. Seni", "dyah widhowati": "PKWU", "yunita k": "IPA Kimia",
+            "eka dias wiwik": "Bio TL", "etik listiyani": "Matematika", "anitasari": "PAI",
+            "jordan indra": "P. Agama Kristen", "anthonius dedi": "P. Agama Katholik", "febri": "P. Agama Hindu",
+            "sri gurendo": "Fisika TL", "umi khasanah": "IPA Fisika"
         };
 
-        const classMaster = {
-            "X.1": { total: 36, mapelDefault: "Seni Budaya" },
-            "X.2": { total: 35, mapelDefault: "Matematika" },
-            "X.3": { total: 36, mapelDefault: "Bahasa Indonesia" },
-            "X.4": { total: 34, mapelDefault: "Sejarah" },
-            "XI MIPA 1": { total: 36, mapelDefault: "Fisika" },
-            "XI MIPA 2": { total: 35, mapelDefault: "Kimia" },
-            "XI IPS 1": { total: 34, mapelDefault: "Sosiologi" },
-            "XI IPS 2": { total: 35, mapelDefault: "Geografi" },
-            "XII Bahasa": { total: 30, mapelDefault: "Bahasa Jepang" },
-            "XII MIPA 1": { total: 35, mapelDefault: "Biologi" },
-            "XII MIPA 2": { total: 34, mapelDefault: "Matematika Peminatan" }
-        };
+        let teacherDirectory = [];
+
+        function normalizeTeacherName(name) {
+            return String(name || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+
+        function getTeacherSubject(name) {
+            const normalizedName = normalizeTeacherName(name);
+            const match = Object.entries(subjectByTeacher).find(([alias]) => {
+                if (alias === 'widodo') return normalizedName.startsWith('widodo ');
+                return normalizedName.includes(alias);
+            });
+            return match ? match[1] : 'Mapel belum dipetakan';
+        }
+
+        async function loadTeacherDirectory() {
+            try {
+                const response = await fetch('daftar_guru_dan_karyawan.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Daftar guru tidak tersedia');
+                const records = await response.json();
+                teacherDirectory = records
+                    .filter(record => {
+                        const mapel = getTeacherSubject(record.nama);
+                        return mapel !== 'Mapel belum dipetakan' && mapel !== '-';
+                    })
+                    .map(record => ({
+                        name: record.nama,
+                        username: `guru${record.no}`,
+                        nip: record.nip,
+                        mapel: getTeacherSubject(record.nama),
+                        defaultClass: 'X E1'
+                    }));
+                renderTeacherOptions();
+            } catch (error) {
+                console.warn('Daftar guru eksternal belum dapat dimuat:', error.message);
+            }
+        }
+
+        function renderTeacherOptions() {
+            const select = document.getElementById('quick-teacher-select');
+            if (!select) return;
+            select.innerHTML = '<option value="">-- Pilih Guru --</option>';
+            teacherDirectory.forEach(teacher => {
+                const option = document.createElement('option');
+                option.value = teacher.username;
+                option.textContent = `${teacher.name} (${teacher.mapel})`;
+                select.appendChild(option);
+            });
+        }
+
+        const daftarKelas = [
+            ...Array.from({ length: 10 }, (_, index) => `X E${index + 1}`),
+            ...Array.from({ length: 10 }, (_, index) => `XI F${index + 1}`),
+            ...Array.from({ length: 10 }, (_, index) => `XII F${index + 1}`)
+        ];
+        const classMaster = Object.fromEntries(daftarKelas.map(className => [className, {
+            total: 36,
+            mapelDefault: 'Mata Pelajaran'
+        }]));
 
         const piketData = [
             { name: "Maudy Ayunda, M.A.", isCoordinator: true },
@@ -607,39 +762,174 @@
             { name: "Siti Nurhaliza, S.Pd.", isCoordinator: false }
         ];
 
-        const jadwalPelajaran = [
-            { text: "Jam Ke-1", start: "07:00", end: "07:40", type: "class" },
-            { text: "Jam Ke-2", start: "07:40", end: "08:20", type: "class" },
-            { text: "Jam Ke-3", start: "08:20", end: "09:00", type: "class" },
-            { text: "Jam Ke-4", start: "09:00", end: "09:40", type: "class" },
-            { text: "Istirahat 1", start: "09:40", end: "09:55", type: "break" },
-            { text: "Jam Ke-5", start: "09:55", end: "10:35", type: "class" },
-            { text: "Jam Ke-6", start: "10:35", end: "11:15", type: "class" },
-            { text: "Jam Ke-7", start: "11:15", end: "11:55", type: "class" },
-            { text: "ISOMA", start: "11:55", end: "12:25", type: "break" },
-            { text: "Jam Ke-8", start: "12:25", end: "13:05", type: "class" },
-            { text: "Jam Ke-9", start: "13:05", end: "13:45", type: "class" },
-            { text: "Jam Ke-10", start: "13:45", end: "15:05", type: "class" }
-        ];
-
-        const teachingDataMap = {
-            "X.1": { kelas: "X.1", mapel: "Seni Budaya", guru: "Reza Rahadian, M.Pd.", total: 36, hadir: 34, sakit: 1, izin: 1, alpa: 0, journalSubmitted: true },
-            "X.2": { kelas: "X.2", mapel: "Matematika", guru: "Dra. Sri Wahyuni", total: 35, hadir: 35, sakit: 0, izin: 0, alpa: 0, journalSubmitted: true },
-            "X.3": { kelas: "X.3", mapel: "Bahasa Indonesia", guru: "Budi Santoso, S.Pd.", total: 36, hadir: 35, sakit: 1, izin: 0, alpa: 0, journalSubmitted: true },
-            "X.4": { kelas: "X.4", mapel: "Sejarah", guru: "Dewi Lestari, M.Hum.", total: 34, hadir: 33, sakit: 0, izin: 1, alpa: 0, journalSubmitted: true },
-            "XI MIPA 1": { kelas: "XI MIPA 1", mapel: "Fisika", guru: "Dr. Eng. Habibie", total: 36, hadir: 35, sakit: 1, izin: 0, alpa: 0, journalSubmitted: true },
-            "XI MIPA 2": { kelas: "XI MIPA 2", mapel: "Kimia", guru: "Dr. Marie Curie, M.Si.", total: 35, hadir: 34, sakit: 0, izin: 0, alpa: 1, journalSubmitted: true },
-            "XI IPS 1": { kelas: "XI IPS 1", mapel: "Sosiologi", guru: "Dian Sastrowardoyo, S.Pd.", total: 34, hadir: 33, sakit: 1, izin: 0, alpa: 0, journalSubmitted: true },
-            "XI IPS 2": { kelas: "XI IPS 2", mapel: "Geografi", guru: "Bambang Pamungkas, S.Pd.", total: 35, hadir: 33, sakit: 1, izin: 1, alpa: 0, journalSubmitted: true },
-            "XII Bahasa": { kelas: "XII Bahasa", mapel: "Bahasa Jepang", guru: "Kenji Sato, M.A.", total: 30, hadir: 30, sakit: 0, izin: 0, alpa: 0, journalSubmitted: true },
-            "XII MIPA 1": { kelas: "XII MIPA 1", mapel: "Biologi", guru: "Iqbaal Ramadhan, M.A.", total: 35, hadir: 34, sakit: 0, izin: 0, alpa: 1, journalSubmitted: true },
-            "XII MIPA 2": { kelas: "XII MIPA 2", mapel: "Matematika Peminatan", guru: "Jerome Polin, B.Sc.", total: 34, hadir: 0, sakit: 0, izin: 0, alpa: 0, journalSubmitted: false }
+        const jadwalBel = {
+            Senin: [
+                { jamKe: "1", mulai: "07:00", selesai: "07:45", ket: "KBM" },
+                { jamKe: "2", mulai: "07:45", selesai: "08:30", ket: "KBM" },
+                { jamKe: "3", mulai: "08:30", selesai: "09:15", ket: "KBM" },
+                { jamKe: "4", mulai: "09:15", selesai: "10:00", ket: "KBM" },
+                { jamKe: "Istirahat", mulai: "10:00", selesai: "10:15", ket: "Istirahat" },
+                { jamKe: "5", mulai: "10:15", selesai: "11:00", ket: "KBM" },
+                { jamKe: "6", mulai: "11:00", selesai: "11:45", ket: "KBM" },
+                { jamKe: "Istirahat", mulai: "11:25", selesai: "12:20", ket: "Istirahat" },
+                { jamKe: "7", mulai: "12:20", selesai: "13:00", ket: "KBM" },
+                { jamKe: "8", mulai: "13:00", selesai: "13:40", ket: "KBM" },
+                { jamKe: "9", mulai: "13:40", selesai: "14:20", ket: "KBM" },
+                { jamKe: "10", mulai: "14:20", selesai: "15:00", ket: "KBM" }
+            ],
+            SelasaRabuKamis: [
+                { jamKe: "Literasi", mulai: "07:00", selesai: "07:15", ket: "Membaca Kitab Suci / Literasi" },
+                { jamKe: "1", mulai: "07:15", selesai: "07:40", ket: "KBM" },
+                { jamKe: "2", mulai: "07:40", selesai: "08:20", ket: "KBM" },
+                { jamKe: "3", mulai: "08:20", selesai: "09:00", ket: "KBM" },
+                { jamKe: "4", mulai: "09:00", selesai: "09:40", ket: "KBM" },
+                { jamKe: "Istirahat", mulai: "09:40", selesai: "09:55", ket: "Istirahat" },
+                { jamKe: "5", mulai: "09:55", selesai: "10:35", ket: "KBM" },
+                { jamKe: "6", mulai: "10:35", selesai: "11:15", ket: "KBM" },
+                { jamKe: "Istirahat", mulai: "11:15", selesai: "12:20", ket: "Istirahat" },
+                { jamKe: "7", mulai: "12:20", selesai: "13:00", ket: "KBM" },
+                { jamKe: "8", mulai: "13:00", selesai: "13:40", ket: "KBM" },
+                { jamKe: "9", mulai: "13:40", selesai: "14:20", ket: "KBM" },
+                { jamKe: "10", mulai: "14:20", selesai: "15:00", ket: "KBM" }
+            ],
+            Jumat: [
+                { jamKe: "0", mulai: "07:00", selesai: "08:00", ket: "Kegiatan Jum'at Berbudaya" },
+                { jamKe: "1", mulai: "08:00", selesai: "08:35", ket: "KBM" },
+                { jamKe: "2", mulai: "08:35", selesai: "09:05", ket: "KBM" },
+                { jamKe: "3", mulai: "09:05", selesai: "09:35", ket: "KBM" },
+                { jamKe: "4", mulai: "09:35", selesai: "10:05", ket: "KBM" },
+                { jamKe: "Istirahat", mulai: "10:05", selesai: "10:20", ket: "Istirahat" },
+                { jamKe: "5", mulai: "10:20", selesai: "10:55", ket: "KBM" },
+                { jamKe: "6", mulai: "10:55", selesai: "11:30", ket: "KBM" },
+                { jamKe: "Istirahat", mulai: "11:30", selesai: "12:50", ket: "Istirahat / Ibadah" },
+                { jamKe: "7", mulai: "12:50", selesai: "13:25", ket: "KBM" },
+                { jamKe: "8", mulai: "13:25", selesai: "14:00", ket: "KBM" }
+            ]
         };
 
+        function getJadwalHariIni() {
+            const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][new Date().getDay()];
+            if (dayName === 'Senin' || dayName === 'Jumat') return jadwalBel[dayName];
+            if (['Selasa', 'Rabu', 'Kamis'].includes(dayName)) return jadwalBel.SelasaRabuKamis;
+            return [];
+        }
+
+        const jadwalMapel = {
+            Senin: {
+                '1': [
+                    { kelas: 'XII F4', guru: 'Irham', mapel: 'PAI' },
+                    { kelas: 'XII F5', guru: 'Anna Yuniati', mapel: 'PP' },
+                    { kelas: 'XI F10', guru: 'Sanusi', mapel: 'B Indo TL' },
+                    { kelas: 'XI F9', guru: 'Winarno', mapel: 'B. Indonesia' },
+                    { kelas: 'E5', guru: 'Yulil Choiri', mapel: 'B. Indonesia' },
+                    { kelas: 'XII F9', guru: 'Endang S', mapel: 'Sejarah TL' },
+                    { kelas: 'XII F1', guru: 'Heni Ratna', mapel: 'B. Inggris Wajib' },
+                    { kelas: 'E9', guru: 'Nasrul', mapel: 'B. Inggris Wajib' },
+                    { kelas: 'XII F2', guru: 'Sularti', mapel: 'MTK TL' },
+                    { kelas: 'XII F8', guru: 'Sri Winarni', mapel: 'Matematika' }
+                ]
+            },
+            Selasa: {
+                '1': [
+                    { kelas: 'XII F10', guru: 'Widiyasari', mapel: 'MTK TL' },
+                    { kelas: 'E8', guru: 'Siti Nurrohmah', mapel: 'IPA Biologi' },
+                    { kelas: 'E5', guru: 'Yunita K', mapel: 'IPA Kimia' },
+                    { kelas: 'E8', guru: 'Sri Dwi Retnaningsih', mapel: 'IPS Ekonomi' },
+                    { kelas: 'XI F8', guru: 'Taupik Mulyadi', mapel: 'Eko TL' },
+                    { kelas: 'XII F7', guru: 'Agustinus Budi', mapel: 'Geo TL' },
+                    { kelas: 'E6', guru: 'Irwan Pradana', mapel: 'IPS Geografi' },
+                    { kelas: 'E3', guru: 'Dyah Widhowati', mapel: 'Pend. Seni' },
+                    { kelas: 'E7', guru: 'Retno Puspito', mapel: 'Bahasa Jawa' },
+                    { kelas: 'XII F8', guru: 'Hetty Herawati', mapel: 'Sos TL' }
+                ]
+            },
+            Rabu: {
+                '1': [
+                    { kelas: 'E8', guru: 'Syaiful Ali N', mapel: 'PAI' },
+                    { kelas: 'XI F10', guru: 'Anna Yuniati', mapel: 'PP' },
+                    { kelas: 'E8', guru: 'Sanusi', mapel: 'Bahasa Indonesia' },
+                    { kelas: 'XI F10', guru: 'Winarno', mapel: 'Bahasa Indonesia' },
+                    { kelas: 'E4', guru: 'Yulil Choiri', mapel: 'Bahasa Indonesia' },
+                    { kelas: 'XII F9', guru: 'Endang S', mapel: 'Sejarah TL' },
+                    { kelas: 'XI F3', guru: 'Wiwik Nawangsih', mapel: 'B. Inggris Wajib' },
+                    { kelas: 'XII F4', guru: 'Heni Ratna', mapel: 'B. Inggris Wajib' },
+                    { kelas: 'XII F4', guru: 'Sularti', mapel: 'MTK TL' },
+                    { kelas: 'XII F6', guru: 'Sri Winarni', mapel: 'Matematika' }
+                ]
+            },
+            Kamis: {
+                '1': [
+                    { kelas: 'XII F7', guru: 'Irham', mapel: 'PAI' },
+                    { kelas: 'XI F7', guru: 'Winarno', mapel: 'Bahasa Indonesia' },
+                    { kelas: 'XI F2', guru: 'Heru Wahyudi', mapel: 'Bahasa Indonesia' },
+                    { kelas: 'E6', guru: 'Yulil Choiri', mapel: 'Bahasa Indonesia' },
+                    { kelas: 'XII F10', guru: 'Endang S', mapel: 'Sejarah TL' },
+                    { kelas: 'XII F6', guru: 'Heni Ratna', mapel: 'B. Inggris Wajib' },
+                    { kelas: 'XII F3', guru: 'Sularti', mapel: 'MTK TL' },
+                    { kelas: 'XII F10', guru: 'Sri Winarni', mapel: 'Matematika' },
+                    { kelas: 'XII F5', guru: 'Widiyasari', mapel: 'MTK TL' },
+                    { kelas: 'XI F1', guru: 'Eka Dias Wiwik', mapel: 'Bio TL' }
+                ]
+            },
+            Jumat: {
+                '1': [
+                    { kelas: 'E3', guru: 'Dadang Yhan', mapel: 'IPS Sejarah' },
+                    { kelas: 'XII F7/8', guru: 'Widodo', mapel: 'Penjasorkes' },
+                    { kelas: 'XI F5/6', guru: 'Erni Agustina', mapel: 'Penjasorkes' },
+                    { kelas: 'XII F9', guru: 'Sri Winarni', mapel: 'Matematika' },
+                    { kelas: 'E5', guru: 'Tien Umiyati', mapel: 'Matematika' },
+                    { kelas: 'XII F2', guru: 'Lilis Kusumawati', mapel: 'Bio TL' },
+                    { kelas: 'XI F2', guru: 'Eka Dias Wiwik', mapel: 'Bio TL' },
+                    { kelas: 'E1', guru: 'Siti Nurrohmah', mapel: 'IPA Biologi' },
+                    { kelas: 'XII F6', guru: 'Rina Kusumastuti', mapel: 'Fisika TL' },
+                    { kelas: 'E10', guru: 'Alimin Sutanto', mapel: 'IPA Kimia' }
+                ]
+            }
+        };
+
+        function getNamaHariIni() {
+            return ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][new Date().getDay()];
+        }
+
+        function getJadwalMapelAktif(filterVal) {
+            const daySchedule = jadwalMapel[getNamaHariIni()] || {};
+            const scheduleSlots = getJadwalHariIni();
+            const nowMinutes = new Date().getHours() * 60 + new Date().getMinutes();
+            if (filterVal === 'auto') {
+                const entries = Object.entries(daySchedule).flatMap(([jamKe, schedules]) => {
+                    const slot = scheduleSlots.find(item => item.jamKe === jamKe);
+                    return slot && slot.ket === 'KBM'
+                        ? schedules.map(entry => ({ ...entry, jam: jamKe }))
+                        : [];
+                });
+                return entries;
+            }
+            const activeSlot = scheduleSlots.find(slot => {
+                const isSelected = filterVal !== 'auto' && slot.jamKe === filterVal;
+                const isActive = filterVal === 'auto' && nowMinutes >= timeToMinutes(slot.mulai) && nowMinutes < timeToMinutes(slot.selesai);
+                return (isSelected || isActive) && slot.ket === 'KBM';
+            });
+            return activeSlot
+                ? (daySchedule[activeSlot.jamKe] || []).map(entry => ({ ...entry, jam: activeSlot.jamKe }))
+                : [];
+        }
+
+        const teachingDataMap = Object.fromEntries(daftarKelas.map(className => [className, {
+            kelas: className,
+            mapel: classMaster[className].mapelDefault,
+            guru: '-',
+            total: classMaster[className].total,
+            hadir: 0,
+            sakit: 0,
+            izin: 0,
+            alpa: 0,
+            journalSubmitted: false
+        }]));
+
         function fillQuickLogin(key) {
-            if (!key || !demoTeachers[key]) return;
-            const t = demoTeachers[key];
-            document.getElementById('login-username').value = t.username || key;
+            const teacher = teacherDirectory.find(item => item.username === key);
+            if (!teacher) return;
+            document.getElementById('login-username').value = teacher.username;
             document.getElementById('login-password').value = '123456';
         }
 
@@ -655,35 +945,95 @@
         ];
 
         let currentClassRoster = [];
+        let siswaData = [];
+        let siswaPerKelas = new Map();
+
+        function normalizeClassName(className) {
+            return String(className || '').trim().replace(/\s+/g, ' ').toUpperCase();
+        }
+
+        function getClassKey(className) {
+            const normalized = normalizeClassName(className);
+            const legacyClassXMatch = normalized.match(/^X F(\d+)$/);
+            return legacyClassXMatch ? `X E${legacyClassXMatch[1]}` : normalized;
+        }
+
+        async function loadSiswaData() {
+            try {
+                const dataFiles = ['siswa_kelas_x.json', 'siswa_kelas_xi.json', 'siswa_kelas_xii.json'];
+                const responses = await Promise.all(dataFiles.map(fileName => fetch(fileName, { cache: 'no-store' })));
+                const failedFile = responses.find((response, index) => !response.ok ? dataFiles[index] : null);
+                if (failedFile) throw new Error(`Gagal memuat ${failedFile}`);
+
+                const dataSets = await Promise.all(responses.map(response => response.json()));
+                const rawStudents = dataSets.flatMap(data => Array.isArray(data) ? data : Object.values(data).flat());
+                const uniqueStudents = new Map();
+                rawStudents.filter(student => student && student.kelas).forEach(student => {
+                    const identity = [student.kelas, student.nisn, student.nis, student.nama].join('|');
+                    if (!uniqueStudents.has(identity)) uniqueStudents.set(identity, student);
+                });
+                siswaData = [...uniqueStudents.values()];
+                siswaPerKelas = new Map(daftarKelas.map(className => [
+                    className,
+                    siswaData.filter(student => getClassKey(student.kelas) === getClassKey(className))
+                ]));
+                registerSiswaClasses();
+                const selectedClass = document.getElementById('input-kelas')?.value;
+                if (selectedClass) loadStudentRoster(selectedClass);
+            } catch (error) {
+                console.warn('Data siswa eksternal belum dapat dimuat:', error.message);
+            }
+        }
+
+        function registerSiswaClasses() {
+            const classes = daftarKelas;
+            classes.forEach(className => {
+                const studentCount = siswaPerKelas.get(className)?.length || 0;
+                classMaster[className].total = studentCount;
+                teachingDataMap[className].total = studentCount;
+            });
+
+            const classSelect = document.getElementById('input-kelas');
+            if (!classSelect) return;
+            const selectedClass = classSelect.value;
+            classSelect.innerHTML = '';
+            classes.forEach(className => {
+                const option = document.createElement('option');
+                option.value = className;
+                option.textContent = `${className} (Total: ${classMaster[className].total} Siswa)`;
+                classSelect.appendChild(option);
+            });
+            if (classes.includes(selectedClass)) classSelect.value = selectedClass;
+        }
 
         function loadStudentRoster(className) {
-            const classInfo = classMaster[className];
-            const total = classInfo ? classInfo.total : 35;
+            const externalStudents = siswaPerKelas.get(className) || siswaData.filter(student =>
+                getClassKey(student.kelas) === getClassKey(className)
+            );
             const existing = teachingDataMap[className];
             
-            currentClassRoster = [];
-            for (let i = 0; i < total; i++) {
-                const baseName = studentNamesSeed[i % studentNamesSeed.length];
-                const name = i >= studentNamesSeed.length ? `${baseName} ${Math.floor(i/studentNamesSeed.length) + 1}` : baseName;
-                
+            currentClassRoster = externalStudents.map((student, index) => {
                 let status = 'H';
                 if (existing && existing.journalSubmitted) {
-                    if (i === 0 && existing.sakit > 0) status = 'S';
-                    else if (i === 1 && existing.izin > 0) status = 'I';
-                    else if (i === 2 && existing.alpa > 0) status = 'A';
-                } else if (className === "X.1" && i === total - 2) {
+                    if (index === 0 && existing.sakit > 0) status = 'S';
+                    else if (index === 1 && existing.izin > 0) status = 'I';
+                    else if (index === 2 && existing.alpa > 0) status = 'A';
+                } else if (className === "X E1" && index === externalStudents.length - 2) {
                     status = 'S';
-                } else if (className === "X.1" && i === total - 1) {
+                } else if (className === "X E1" && index === externalStudents.length - 1) {
                     status = 'I';
                 }
 
-                currentClassRoster.push({
-                    id: i + 1,
-                    nis: `2024${String(100 + i + 1)}`,
-                    name: name,
+                return {
+                    id: index + 1,
+                    nisn: student.nisn || '',
+                    nis: student.nis || '',
+                    jenis_kelamin: student.jenis_kelamin || '',
+                    kelas: student.kelas,
+                    name: student.nama,
                     status: status
-                });
-            }
+                };
+            });
             
             renderStudentRosterUI();
         }
@@ -787,6 +1137,20 @@
             return h * 60 + m;
         }
 
+        function getJournalDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            const time = now.toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            return `${date} ${time} WIB`;
+        }
+
         function startRealtimeClock() {
             const dateEl = document.getElementById('header-date');
             const timeEl = document.getElementById('header-time');
@@ -825,13 +1189,17 @@
         window.onload = function() {
             startRealtimeClock();
             showDashboard();
+            loadSiswaData();
+            loadTeacherDirectory();
             lucide.createIcons();
         };
 
         function showDashboard() {
             document.getElementById('view-dashboard').classList.remove('hidden-view');
+            document.getElementById('view-info').classList.add('hidden-view');
             document.getElementById('view-auth').classList.add('hidden-view');
             document.getElementById('view-teacher').classList.add('hidden-view');
+            setActiveNav('beranda');
             
             renderUserPill();
             renderKpiCards();
@@ -841,9 +1209,36 @@
             lucide.createIcons();
         }
 
+        function navigateToSection(sectionId) {
+            document.getElementById('view-dashboard').classList.add('hidden-view');
+            document.getElementById('view-info').classList.remove('hidden-view');
+            document.getElementById('view-auth').classList.add('hidden-view');
+            document.getElementById('view-teacher').classList.add('hidden-view');
+            setActiveNav(sectionId);
+            document.querySelectorAll('#view-info section').forEach(infoSection => {
+                infoSection.classList.add('hidden-view');
+            });
+            const section = document.getElementById(sectionId);
+            window.scrollTo({ top: 0, behavior: 'auto' });
+            if (section) {
+                section.classList.remove('hidden-view');
+                setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 0);
+            }
+        }
+
+        function setActiveNav(sectionId) {
+            document.querySelectorAll('[data-nav-section]').forEach(link => {
+                const isActive = link.dataset.navSection === sectionId;
+                link.classList.toggle('bg-ink-black', isActive);
+                link.classList.toggle('text-white', isActive);
+                link.classList.toggle('font-heading', isActive);
+            });
+        }
+
         function showAuth() {
             if (window.appState.isLoggedIn) {
                 document.getElementById('view-dashboard').classList.add('hidden-view');
+                document.getElementById('view-info').classList.add('hidden-view');
                 document.getElementById('view-auth').classList.add('hidden-view');
                 document.getElementById('view-teacher').classList.remove('hidden-view');
                 
@@ -857,6 +1252,7 @@
                 autoFillClassStudentCount();
             } else {
                 document.getElementById('view-dashboard').classList.add('hidden-view');
+                document.getElementById('view-info').classList.add('hidden-view');
                 document.getElementById('view-auth').classList.remove('hidden-view');
                 document.getElementById('view-teacher').classList.add('hidden-view');
             }
@@ -865,17 +1261,22 @@
         function handleUnifiedLogin(e) {
             e.preventDefault();
             const uname = document.getElementById('login-username').value.trim();
-            const matchedKey = Object.keys(demoTeachers).find(k => k === uname.toLowerCase() || demoTeachers[k].name.toLowerCase().includes(uname.toLowerCase()));
-            
-            if (matchedKey) {
-                window.appState.loggedTeacher = demoTeachers[matchedKey];
+            const normalizedInput = normalizeTeacherName(uname);
+            const matchedTeacher = teacherDirectory.find(teacher =>
+                teacher.username.toLowerCase() === uname.toLowerCase() ||
+                (teacher.nip && teacher.nip === uname) ||
+                normalizeTeacherName(teacher.name).includes(normalizedInput)
+            );
+
+            if (matchedTeacher) {
+                window.appState.loggedTeacher = matchedTeacher;
             } else {
                 window.appState.loggedTeacher = { 
                     name: uname || "Guru Pengampu", 
                     username: uname || "guru",
-                    nip: "19880512 201402 1 009",
-                    mapel: "Mata Pelajaran Umum",
-                    defaultClass: "X.1"
+                    nip: "-",
+                    mapel: "Mapel belum dipetakan",
+                    defaultClass: "X E1"
                 };
             }
 
@@ -978,15 +1379,19 @@
 
             const now = new Date();
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
-            const schoolStartMinutes = 7 * 60; // 07:00
-            const schoolEndMinutes = 15 * 60 + 5; // 15:05
+            const jadwalHariIni = getJadwalHariIni();
+            const schoolEndMinutes = jadwalHariIni.length > 0
+                ? timeToMinutes(jadwalHariIni[jadwalHariIni.length - 1].selesai)
+                : 0;
 
             if (filterVal === 'auto') {
-                if (currentMinutes >= schoolEndMinutes) {
+                if (jadwalHariIni.length === 0 || currentMinutes >= schoolEndMinutes) {
                     banner.classList.remove('hidden');
-                    bannerText.innerText = "Seluruh Kegiatan Belajar Mengajar (KBM) Hari Ini Telah Selesai (Selesai pukul 15.05 WIB).";
+                    bannerText.innerText = jadwalHariIni.length === 0
+                        ? "Tidak ada jadwal KBM untuk hari ini."
+                        : `Seluruh Kegiatan Belajar Mengajar (KBM) Hari Ini Telah Selesai (Selesai pukul ${jadwalHariIni[jadwalHariIni.length - 1].selesai} WIB).`;
                     panelTitle.innerText = "Status Kehadiran & Jurnal (Selesai KBM)";
-                } else if (currentMinutes < schoolStartMinutes) {
+                } else if (currentMinutes < timeToMinutes(jadwalHariIni[0].mulai)) {
                     banner.classList.remove('hidden');
                     bannerText.innerText = "Kegiatan Belajar Mengajar (KBM) Belum Dimulai (Dimulai pukul 07.00 WIB).";
                     panelTitle.innerText = "Status Kehadiran & Jurnal (Persiapan)";
@@ -999,12 +1404,36 @@
                 panelTitle.innerText = `Kehadiran & Guru Mengajar (Jam Ke-${filterVal})`;
             }
 
+            const scheduledEntries = getJadwalMapelAktif(filterVal);
             let html = '';
-            Object.values(teachingDataMap).forEach(d => {
-                const isSubmitted = d.journalSubmitted;
+
+            if (scheduledEntries.length === 0) {
+                container.innerHTML = `
+                    <div class="min-w-[980px] rounded-2xl border-2 border-dashed border-ink-black bg-ink-bg p-8 text-center">
+                        <i data-lucide="calendar-clock" class="w-8 h-8 mx-auto mb-2 text-ink-accent"></i>
+                        <p class="text-sm font-black text-ink-black">Tidak ada mata pelajaran yang sedang berlangsung.</p>
+                        <p class="text-xs font-bold text-ink-grayMuted mt-1">Jadwal akan tampil otomatis sesuai hari dan jam KBM.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            scheduledEntries.forEach(schedule => {
+                const savedJournal = teachingDataMap[schedule.kelas] || {};
+                const d = { ...savedJournal, ...schedule };
+                const isSubmitted = savedJournal.journalSubmitted === true;
+                const slot = jadwalHariIni.find(item => item.jamKe === schedule.jam);
+                const slotStart = slot ? timeToMinutes(slot.mulai) : 0;
+                const slotEnd = slot ? timeToMinutes(slot.selesai) : 0;
+                const isActive = currentMinutes >= slotStart && currentMinutes < slotEnd;
+                const isFinished = currentMinutes >= slotEnd;
+                const dateTime = d.tanggalJam || getJournalDateTime();
                 const statusBadge = isSubmitted 
                     ? `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-extrabold text-[10px] rounded-full border border-emerald-300 flex items-center gap-1 font-heading"><i data-lucide="check-circle" class="w-3 h-3"></i> Terisi</span>`
-                    : `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-extrabold text-[10px] rounded-full border border-amber-300 flex items-center gap-1 font-heading"><i data-lucide="clock" class="w-3 h-3"></i> Belum Absen</span>`;
+                    : isActive
+                        ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-extrabold text-[10px] rounded-full border border-amber-300 flex items-center gap-1 font-heading"><i data-lucide="clock" class="w-3 h-3"></i> Belum Absen</span>`
+                        : `<span class="px-2.5 py-1 bg-slate-100 text-slate-700 font-extrabold text-[10px] rounded-full border border-slate-300 flex items-center gap-1 font-heading"><i data-lucide="${isFinished ? 'check' : 'calendar-clock'}" class="w-3 h-3"></i> ${isFinished ? 'Selesai' : 'Akan Datang'}</span>`;
 
                 const attendanceInfo = isSubmitted
                     ? `<div class="flex flex-col">
@@ -1014,28 +1443,28 @@
                     : `<span class="text-xs font-bold text-amber-700 italic">Belum Diinput</span>`;
 
                 html += `
-                <div class="grid grid-cols-12 items-center bg-white rounded-2xl border-2 border-ink-black p-3.5 hover:shadow-[3px_3px_0px_0px_#111111] transition-all gap-2">
-                    <!-- Column 1: Kelas -->
-                    <div class="col-span-2 flex items-center gap-2">
-                        <span class="px-2.5 py-1 bg-ink-black text-white font-black text-xs rounded-xl font-heading shadow-sm">${d.kelas}</span>
+                <div class="grid grid-cols-12 min-w-[980px] items-center bg-white rounded-2xl border-2 border-ink-black p-3.5 hover:shadow-[3px_3px_0px_0px_#111111] transition-all gap-2">
+                    <div class="col-span-2 flex flex-col">
+                        <span class="font-black text-[11px] text-ink-black">${dateTime}</span>
+                        <span class="text-[10px] font-bold text-ink-grayMuted">Jam Ke-${d.jam || '-'}</span>
                     </div>
-                    <!-- Column 2: Mapel & Guru -->
-                    <div class="col-span-4 flex flex-col">
-                        <span class="font-black text-xs text-ink-black truncate">${d.mapel}</span>
-                        <span class="font-bold text-[11px] text-ink-grayMuted truncate">${d.guru}</span>
+                    <div class="col-span-1">
+                        <span class="px-2 py-1 bg-ink-black text-white font-black text-[11px] rounded-xl font-heading shadow-sm">${d.kelas}</span>
                     </div>
-                    <!-- Column 3: Kehadiran Siswa -->
-                    <div class="col-span-3">
+                    <div class="col-span-2 font-bold text-[11px] text-ink-black truncate">${d.guru}</div>
+                    <div class="col-span-2 font-black text-[11px] text-ink-black truncate">${d.mapel}</div>
+                    <div class="col-span-2 text-[11px] font-bold text-ink-grayMuted line-clamp-2">${d.materi || '-'}</div>
+                    <div class="col-span-2">
                         ${attendanceInfo}
                     </div>
-                    <!-- Column 4: Status Jurnal -->
-                    <div class="col-span-3 flex justify-end">
+                    <div class="col-span-1 flex justify-end">
                         ${statusBadge}
                     </div>
                 </div>
                 `;
             });
             container.innerHTML = html;
+            lucide.createIcons();
         }
 
         function renderGuruPiket() {
@@ -1065,10 +1494,10 @@
             const now = new Date();
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-            jadwalPelajaran.forEach((j) => {
-                const isBreak = j.type === 'break';
-                const startMin = timeToMinutes(j.start);
-                const endMin = timeToMinutes(j.end);
+            getJadwalHariIni().forEach((j) => {
+                const isBreak = j.ket.toLowerCase().includes('istirahat') || j.ket.toLowerCase().includes('ibadah');
+                const startMin = timeToMinutes(j.mulai);
+                const endMin = timeToMinutes(j.selesai);
 
                 let status = "Belum";
                 if (currentMinutes >= endMin) {
@@ -1097,10 +1526,10 @@
                         <div class="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${iconColor}">
                             <i data-lucide="${isBreak ? 'coffee' : 'list'}" class="w-3 h-3"></i>
                         </div>
-                        <span class="font-black text-ink-black truncate font-heading">${j.text}</span>
+                        <span class="font-black text-ink-black truncate font-heading">${j.ket !== 'KBM' ? j.ket : `Jam Ke-${j.jamKe}`}</span>
                     </div>
                     <div class="col-span-4 text-center font-bold text-[10px] text-ink-grayMuted">
-                        ${j.start} - ${j.end}
+                        ${j.mulai} - ${j.selesai}
                     </div>
                     <div class="col-span-4 flex justify-end">
                         ${statusHtml}
@@ -1117,7 +1546,10 @@
             const classInfo = classMaster[selectedClass];
             if (!classInfo) return;
 
-            document.getElementById('input-total-label').innerText = `Target Total: ${classInfo.total} Siswa`;
+            loadStudentRoster(selectedClass);
+
+            const totalLabel = document.getElementById('input-total-label');
+            if (totalLabel) totalLabel.innerText = `Target Total: ${classInfo.total} Siswa`;
             
             // If already filled previously, keep it, or set smart defaults
             const existing = teachingDataMap[selectedClass];
@@ -1169,24 +1601,34 @@
             const materi = document.getElementById('input-materi').value;
 
             const total = classMaster[selectedClass]?.total || (hadir + sakit + izin + alpa);
-
-            // Update local state map
-            teachingDataMap[selectedClass] = {
+            const tanggalJam = getJournalDateTime();
+            const journalEntry = {
                 kelas: selectedClass,
-                mapel: mapel || classMaster[selectedClass]?.mapelDefault || "Mata Pelajaran",
                 guru: window.appState.loggedTeacher?.name || "Guru Pengampu",
+                mapel: mapel || classMaster[selectedClass]?.mapelDefault || "Mata Pelajaran",
+                materi: materi,
+                jam: jam,
+                tanggalJam: tanggalJam,
                 total: total,
                 hadir: hadir,
                 sakit: sakit,
                 izin: izin,
                 alpa: alpa,
-                journalSubmitted: true,
-                notes: notes,
-                materi: materi,
-                jam: jam
+                notes: notes
             };
 
-            window.appState.totalSemesterJournals += 1;
+            // Update local state map
+            teachingDataMap[selectedClass] = {
+                ...journalEntry,
+                journalSubmitted: true,
+                journalId: `${selectedClass}-${Date.now()}`
+            };
+
+            window.appState.journalLog.push({
+                ...journalEntry,
+                journalId: teachingDataMap[selectedClass].journalId
+            });
+            window.appState.totalSemesterJournals = window.appState.journalLog.length;
 
             showToast(`Jurnal & Presensi Kelas ${selectedClass} Berhasil Disimpan!`, "success");
             
