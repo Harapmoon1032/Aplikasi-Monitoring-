@@ -710,21 +710,23 @@
     <!-- Auth View (Portal Login) -->
     <main id="view-auth" class="flex-grow w-full items-center justify-center p-4 hidden-view flex">
         <div
-            class="bg-white rounded-[32px] shadow-[6px_6px_0px_0px_#111111] border-2 border-ink-black max-w-md w-full p-8 relative overflow-hidden">
-            <button onclick="showDashboard()"
-                class="absolute top-6 right-6 p-2 text-ink-black hover:bg-ink-bg rounded-full transition-colors border-2 border-ink-black">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-
-            <!-- Role Tab Switcher -->
-            <div class="flex p-1 bg-ink-bg rounded-2xl border-2 border-ink-black mb-5">
-                <button type="button" id="tab-auth-guru" onclick="switchAuthTab('guru')"
-                    class="flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 bg-ink-black text-white shadow-sm font-heading">
-                    <i data-lucide="user-check" class="w-4 h-4"></i> Portal Guru
-                </button>
-                <button type="button" id="tab-auth-ketua" onclick="switchAuthTab('ketua_kelas')"
-                    class="flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 text-ink-black hover:bg-white/60 font-heading">
-                    <i data-lucide="award" class="w-4 h-4"></i> Portal Ketua Kelas
+            class="bg-white rounded-[32px] shadow-[6px_6px_0px_0px_#111111] border-2 border-ink-black max-w-md w-full p-6 sm:p-8 relative overflow-hidden">
+            <!-- Role Tab Switcher & Close Button Header -->
+            <div class="flex items-center gap-2.5 mb-6">
+                <div class="flex flex-1 p-1 bg-ink-bg rounded-2xl border-2 border-ink-black">
+                    <button type="button" id="tab-auth-guru" onclick="switchAuthTab('guru')"
+                        class="flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 bg-ink-black text-white shadow-sm font-heading">
+                        <i data-lucide="user-check" class="w-4 h-4"></i> Portal Guru
+                    </button>
+                    <button type="button" id="tab-auth-ketua" onclick="switchAuthTab('ketua_kelas')"
+                        class="flex-1 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 text-ink-black hover:bg-white/60 font-heading">
+                        <i data-lucide="award" class="w-4 h-4"></i> Portal Ketua Kelas
+                    </button>
+                </div>
+                <button onclick="showDashboard()"
+                    class="h-11 w-11 flex-shrink-0 flex items-center justify-center text-ink-black bg-white hover:bg-ink-bg rounded-2xl transition-all border-2 border-ink-black shadow-[2px_2px_0px_0px_#111111] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none cursor-pointer"
+                    title="Tutup & Kembali ke Dashboard">
+                    <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
